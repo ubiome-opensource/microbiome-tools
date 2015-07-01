@@ -5,8 +5,12 @@ Please add your tools here, and edit this file to keep a directory of scripts, p
 
 **RuBiome: simple scripts in R**
 
-```
-# returns a dataframe showing how the two samples compare
-# returns the count_norm of sample2 - sample1 (i.e. positive numbers indicate more in sample2)
-uBiome_compare_samples <- function(sample1,sample2,rank="species")
-```
+
+[__uBiome_compare_samples__](../compareSamples.md)
+Given two samples, output all the differences, including the difference in count_norm
+
+[__uBiome_sample_unique__](../findUnique.md)
+Given two samples, output which rows are the uniquely found in one but not the other.
+
+[__convert_json_files_to_csv__](../convertJsonToCSV.md) Convert all JSON files in a
+directory to CSV files, suitable for reading in Excel or use with the other functions here.
