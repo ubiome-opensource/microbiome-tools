@@ -2,6 +2,8 @@
 
 Please add your tools here, and edit this file to keep a directory of scripts, programs, templates, or anything else you find useful for manipulating or analyzing uBiome information.
 
+**[ubiomeCompare.py: simple scripts in Python](./docs/compareSamplesPython.md)** If you have a Mac, this is the easiest script to run. You won't need to install anything new besides the script. Just follow the instructions.
+
 
 **[RuBiome: simple scripts in R](./docs/RuBiomeTools.md)**
 
