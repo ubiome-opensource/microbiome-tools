@@ -1,6 +1,6 @@
 # Compare two uBiome samples (Python)
 
-Download the script ubiomeCompare.py to the same folder where you have two uBiome taxonomy files you want to compare. 
+Download the script [ubiomeCompare.py](../ubiomeCompare.py) to the same folder where you have two uBiome taxonomy files you want to compare. 
 
 On the Macintosh, open the ```Terminal``` application and at the prompt type:
 
