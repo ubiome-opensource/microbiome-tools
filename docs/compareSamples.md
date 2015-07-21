@@ -1,4 +1,4 @@
-#Compare uBiome Samples#
+#Compare uBiome Samples (R version)#
 
 To use this tool, type this in R:
 ```
