@@ -2,22 +2,23 @@
 # ### uBiomeCompare.py
 ### lets you analyze your uBiome sample
 ###
-### works from the command line:
+### works from the command line in either Python 2.7+ or Python 3+
 ### %python uBiomeCompare
 """
 
-this text is ignored
+This section is for brief in-app doc testing.
+
+To run, type
+python ubiomeCompare -c "../Data/sprague data/Sprague-ubiomeMay2014.json" "../Data/sprague data/Sprague-uBiomeJun2014.json"
 
 >>> myApp.testUnique()
-44
->>> v = myApp.testCompare(myApp.esample,myApp.msample)
+137
+>>> v=myApp.testCompare()
 >>> len(v.sampleList)
-195
+139
 
 >>> 5+5
 10
-
-
 
 """
 __author__ = 'sprague'
@@ -90,19 +91,6 @@ class UbiomeSample():
             return None
 
 
-    # def addCountsToList(self,organismList):
-    #     """
-    #
-    #     :rtype : list
-    #     :param organismList: a  list of organism tax_names
-    #     :param sample: a well-formed uBiome JSON-formatted sample
-    #     :return: a list of dictionaries that includes the tax_name for the sample, plus its count_norm
-    #     """
-    #     if organismList == []:
-    #         return []
-    #     else:
-    #         return [{"tax_name":organismList[0],"count_norm":self.countNormOf(organismList[0])}] +  self.addCountsToList(organismList[1:])
-
     def unique(self,sample2):
         """
         returns all organisms that are unique to sample 1
@@ -140,7 +128,7 @@ class UbiomeSample():
             t = t=sample2.taxonOf(taxon1["tax_name"])
             if t: #found this taxon in sample2
                 countDiff = int(taxon1["count_norm"]) - int(t["count_norm"])
-                taxList = taxList + [{"tax_name":taxon1["tax_name"],"count_norm":str(countDiff),"tax_rank":taxon1["tax_rank"]}]
+                taxList = [{"tax_name":taxon1["tax_name"],"count_norm":str(countDiff),"tax_rank":taxon1["tax_rank"]}] + taxList
 
 
 
@@ -175,20 +163,6 @@ class UbiomeDiffSample(UbiomeSample):
 
 
 
-# def ubiomeAddCountsToList(organismList,sample):
-#     """
-#
-#     :rtype : list
-#     :param organismList: a  list of organism tax_names
-#     :param sample: a well-formed uBiome JSON-formatted sample
-#     :return: a list of dictionaries that includes the tax_name for the sample, plus its count_norm
-#     """
-#     if organismList == []:
-#         return []
-#     else:
-#         return [{"tax_name":organismList[0],"count_norm":ubiomeCountNormOf(organismList[0],sample)}] +  ubiomeAddCountsToList(organismList[1:],sample)
-#
-
 
 ## Python sets:
 ## a - b
@@ -198,29 +172,29 @@ class UbiomeDiffSample(UbiomeSample):
 
 class ubiomeApp():
     def __init__(self,fname1,fname2):
-        self.msample = UbiomeSample(fname1)
-        self.esample = UbiomeSample(fname2)
+        self.sample1 = UbiomeSample(fname1)
+        self.sample2 = UbiomeSample(fname2)
 
 
 
     def testUnique(self):
-        unique=self.esample.unique(self.msample)
+        unique=self.sample1.unique(self.sample2)
         print(len(unique.sampleList))
         #print("len esample.unique",len(unique.sampleList))
-        unique.writeCSV("esample.csv")
+        unique.writeCSV("sample1Unique.csv")
 
     def runUnique(self):
-        unique=self.esample.unique(self.msample)
+        unique=self.sample1.unique(self.sample2)
         #print("len esample.unique",len(unique.sampleList))
         unique.writeCSV(sys.stdout)
 
-    def testCompare(self,sample1,sample2):
-        compare=sample1.compareWith(sample2)
-        compare.writeCSV("ecompare.csv")
+    def testCompare(self):
+        compare=self.sample1.compareWith(self.sample2)
+        compare.writeCSV("sample1Compare.csv")
         return compare
 
-    def runCompare(self,sample1,sample2):
-        compare=sample1.compareWith(sample2)
+    def runCompare(self):
+        compare=self.sample1.compareWith(self.sample2)
         compare.writeCSV(sys.stdout)
         return compare
 
@@ -251,12 +225,12 @@ if __name__=="__main__":
         b=args.sample2
 
    # a = "../Data/sprague data/Sprague-ubiomeMay2014.json"
-   # b = "../Data/others/elijah.json"
+   # b = "../Data/sprague data/Sprague-uBiomeJun2014.json"
     myApp = ubiomeApp(a,b)
     if args.unique:
         myApp.runUnique()
     if args.compare:
-        myApp.runCompare(myApp.esample,myApp.msample)
+        myApp.runCompare()
 
     DEBUG = False
 
