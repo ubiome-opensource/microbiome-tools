@@ -12,7 +12,7 @@ To run, type
 python ubiomeCompare -c "../Data/sprague data/Sprague-ubiomeMay2014.json" "../Data/sprague data/Sprague-uBiomeJun2014.json"
 
 >>> myApp.testUnique()
-137
+384
 >>> v=myApp.testCompare()
 >>> len(v.sampleList)
 139
@@ -51,6 +51,9 @@ class UbiomeSample():
         sourceJson = json.load(jsonFile)
         self.sampleList = sourceJson["ubiome_bacteriacounts"] # a list of dicts
         self.taxRankList = []
+
+    def __len__(self):
+        len(self.sampleList)
 
     def showContents(self):
         print("length=",len(self.sampleList))
@@ -98,17 +101,25 @@ class UbiomeSample():
         :param sample2:
         :return: UBiomeDiffSample
         """
-        uniqueSet = set(self.taxranklist()) - set(sample2.taxranklist())  # all unique taxons
-        listWithCounts = self.addCountsToList(list(uniqueSet))
-        returnSample=UbiomeDiffSample(listWithCounts)
-        return returnSample
+        uniqueList = []
+        for taxon1 in self.sampleList:
+            t=sample2.taxonOf(taxon1["tax_name"])
+            if not t: # not found sample2, so add to the return list
+                uniqueList = [{"tax_name":taxon1["tax_name"],"count_norm":taxon1["count_norm"],"tax_rank":taxon1["tax_rank"]}] + uniqueList
+        return UbiomeDiffSample(uniqueList)
+        #
+        #
+        # uniqueSet = set(self.taxranklist()) - set(sample2.taxranklist())  # all unique taxons
+        # listWithCounts = self.addCountsToList(list(uniqueSet))
+        # returnSample=UbiomeDiffSample(listWithCounts)
+        # return returnSample
 
     def addCountsToList(self,taxonList):
         """
         :param taxonList: list # contains taxnames
         :return:
         """
-        if taxonList == []:
+        if not taxonList:
             return []
         else:
             return [{"tax_name":taxonList[0],"count_norm":self.countNormOf(taxonList[0])}] +\
