@@ -1,18 +1,18 @@
 # Compare two uBiome samples (Python)
 
-Download the script [ubiomeCompare.py](../ubiomeCompare.py) to the same folder where you have two uBiome taxonomy files you want to compare. 
+Download the script [ubiome.py](../ubiome.py) to the same folder where you have two uBiome taxonomy files you want to compare. 
 
 On the Macintosh, open the ```Terminal``` application and at the prompt type:
 
 ```
-> python ubiomeCompare.py -h
+> python ubiome.py -h
 ```
 
 You should see the following:
 
 ```
 
-usage: ubiomeCompare.py [-h] [-c COMPARE] [-u UNIQUE] [-d DEBUG] sample2
+usage: ubiome.py [-h] [-c COMPARE] [-u UNIQUE] [-d DEBUG] sample2
 
 positional arguments:
   sample2               sample you are comparing to
@@ -31,7 +31,7 @@ optional arguments:
 To compare two samples, type:
 
 ```
-> python ubiomeCompare.py -c sample1.json sample2.json
+> python ubiome.py -c sample1.json sample2.json
 
 ```
 
@@ -40,14 +40,14 @@ You will see several lines of comma-separated values indicating the difference i
 You can also type the following to save the results to the file "compare12.csv"
 
 ```
-> python ubiomeCompare.py -c sample1.json sample2.json > compare12.csv
+> python ubiome.py -c sample1.json sample2.json > compare12.csv
 
 ```
 
 Similarly, to see the unique organisms in one sample compared to the other, type:
 
 ```
-> python ubiomeCompare.py -u sample1.json sample2.json > unique12.csv
+> python ubiome.py -u sample1.json sample2.json > unique12.csv
 
 ```
 
