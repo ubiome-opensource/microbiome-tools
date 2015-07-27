@@ -2,6 +2,8 @@
 
 Download the script [ubiome.py](../ubiome.py) to the same folder where you have two uBiome taxonomy files you want to compare. 
 
+## Command line version (easiest)
+
 On the Macintosh, open the ```Terminal``` application and at the prompt type:
 
 ```
@@ -51,8 +53,36 @@ Similarly, to see the unique organisms in one sample compared to the other, type
 
 ```
 
+## Module version (requires knowledge of Python)
+
+Write your own Python script. Here's an example using JSON files from the current directory:
+
+	import ubiome
+	# create a new instance of class UbiomeSample, initialized to a json file
+	jul = ubiome.UbiomeSample("Sprague-ubiomeJul2015.json")
+	apr = ubiome.UbiomeSample("sprague-ubiome-150428.json")
+
+	# these variables hold instances of class UbiomeDiffSample
+	aprJulc = apr.compareWith(jul)
+	aprJulu = apr.unique(jul)
+
+	# sort them, pretty-print them
+	aprJulu.sort("count_norm")
+	aprJuluPretty = aprJulu.prettyPrint() 
+	aprJulu.writeCSV("AprJulUnique.csv")  # or write to a CSV file on disk
 
 
+You can also merge several sample files together to make a big CSV file where the first row is all the taxons ever found in your samples, and the other columns are your different samples, with rows containing the `count_norm` for every taxon.  
+
+Example, given two samples (JSON files read from current directory)
+
+	aprB = ubiome.UbiomeSample("sprague-ubiome-150428.json",name = "Apr28")
+    jul = ubiome.UbiomeSample("Sprague-ubiomeJul2015.json",name = "Jun 2015")
+    x = ubiome.UbiomeMultiSample(aprB)
+    x.merge(jul)
+    x.writeCSV("combinedResults.csv")
+    
+This will leave you the file "combinedResults.csv" with the combined `count_norm`s for your two samples
 
 
 
