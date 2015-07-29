@@ -47,6 +47,14 @@ class UbiomeSample():
         sourceJson = json.load(jsonFile)
         self.sampleList = sourceJson["ubiome_bacteriacounts"] # a list of dicts
 
+    def readCSVfile(self,fname):
+        csvFile = open(fname)
+        sourceCSV = csv.DictReader(csvFile)
+        header = sourceCSV.fieldnames
+        for row in sourceCSV:
+            self.sampleList+=[row]
+
+
     def prettyPrint(self):
         try:
             __import__("prettytable")
