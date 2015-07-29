@@ -1,3 +1,5 @@
+NOTE: PLEASE USE THE NEW VERSION OF THIS SCRIPT.  THE CURRENT SCRIPT IS NOW "ubiome.py"
+
 #! /usr/bin/env python
 # ### uBiomeCompare.py
 ### lets you analyze your uBiome sample
