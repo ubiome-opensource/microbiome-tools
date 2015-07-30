@@ -14,16 +14,6 @@ import __future__
 from argparse import ArgumentParser
 
 
-
-class Taxon():
-    """
-    An abstract representation of a uBiome taxon
-    """
-
-
-
-
-
 class UbiomeSample():
     """ class representation of a well-formed uBiome sample
 
@@ -31,6 +21,7 @@ class UbiomeSample():
 
     def __init__(self,fname=[],name=[]):
         """ initialize with a string representing the path to a uBiome-formatted JSON file
+        If no name, just instantiate an object; you can read the contents later using readJSONFile or readCSVFile
         """
         if fname:
             self.readJSONfile(fname)
@@ -43,11 +34,20 @@ class UbiomeSample():
             self.name = name
 
     def readJSONfile(self,fname):
+        """ read a JSON file of the uBiome taxonomy (the one you get from downloading from the uBiome web site)
+        :param fname: string
+        :return:
+        """
         jsonFile = open(fname)
         sourceJson = json.load(jsonFile)
         self.sampleList = sourceJson["ubiome_bacteriacounts"] # a list of dicts
 
     def readCSVfile(self,fname):
+        """
+        read a CSV-formatted version of the uBiome taxonomy data.
+        :param fname:
+        :return:
+        """
         csvFile = open(fname)
         sourceCSV = csv.DictReader(csvFile)
         header = sourceCSV.fieldnames
@@ -56,6 +56,10 @@ class UbiomeSample():
 
 
     def prettyPrint(self):
+        """
+        print a nice ascii table of the sample
+        :return: prettytable
+        """
         try:
             __import__("prettytable")
         except ImportError:
@@ -71,14 +75,21 @@ class UbiomeSample():
 
 
     def sort(self,sortBy="tax_name"):
+        """
+        sort the sample (mutably) by sortBy (which is any of the JSON headers)
+        :param sortBy:
+        :return:
+        """
         self.sampleList = sorted(self.sampleList,key=lambda k:k[sortBy],reverse=True)
         return True
 
 
 
-
-
     def showContents(self):
+        """ display the highlights of this sample (useful for debugging)
+
+        :return:
+        """
         l = len(self.sampleList)
         print("length=",l)
         i=0
@@ -158,7 +169,7 @@ class UbiomeSample():
 
 
     def compareWith(self,sample2):
-        """
+        """ compare the current sample with sample2 and return a uBiomeDiffSample object of the differences
 
         :param sample2: UbiomeSample
         :return: UBiomeDiffSample
@@ -170,15 +181,15 @@ class UbiomeSample():
             if t: #found this taxon in sample2
                 countDiff = int(taxon1["count_norm"]) - int(t["count_norm"])
                 taxList = [{"tax_name":taxon1["tax_name"],"count_norm":str(countDiff),"tax_rank":taxon1["tax_rank"]}] + taxList
-
-
-
-     #   allOrganisms = set(self.taxranklist()) & set(sample2.taxranklist())
-     #   allOrganismsWithCounts = self.addCountsToList(list(allOrganisms))
         diffSample = UbiomeDiffSample(taxList)
         return diffSample
 
     def writeCSV(self,filename):
+        """ write contents of the current sample to a CSV file.  If filename=sys.stdout, just display it
+
+        :param filename:
+        :return:
+        """
         if filename==sys.stdout:
             ubiomeWriter = csv.DictWriter(sys.stdout,dialect='excel',fieldnames=self.sampleList[0].keys())
             #print('writing to csv')
@@ -261,11 +272,6 @@ class UbiomeMultiSample():
 
         #[sample["count_norm"] for sample in sample2.sampleList]
         oldSamplesList = self.samples[len(self.samples)-1]
-        #newCounts =  oldSamplesList[0][1:] + [taxon["count_norm"] for taxon in newTaxons]
-        # problem: newCounts contains the sample counts from the previous sample, not the current one.
-        # need to generate a list of counts that correspond to the organisms in fullTaxList
-        # if I have the UbiomeSample object for the previous sample, this is easy to compute:
-        # [oldSample.taxonOf(self.fullTaxList[i]) for taxon in oldSample]
         newSampleCountsForPreviousTaxa = []
         for i in range(len(oldSamplesList)-1):
             taxonForTaxName = sample2.taxonOf(self.fullTaxList[i+1][0])
@@ -289,6 +295,11 @@ class UbiomeMultiSample():
 
 
     def writeCSV(self,filename):
+        """ write the merged bunch of sample to a single CSV file (or sys.stdout)
+
+        :param filename:
+        :return:
+        """
         if filename==sys.stdout:
             ubiomeWriter = csv.DictWriter(sys.stdout,dialect='excel',fieldnames=["tax_name"]+ ["tax_rank"] + [sample[0] for sample in self.samples])
             #print('writing to csv')
@@ -313,13 +324,12 @@ class UbiomeMultiSample():
                     ubiomeWriter.writerow(dict([rowDict]+[rankDict] +sampleDict))
 
 
-## Python sets:
-## a - b
-## a | b
-## a & b
-## a ^ b  # in a or b but not both
+
 
 class ubiomeApp():
+    """
+    app-ified version to make testing easier.
+    """
     def __init__(self,fname1,fname2):
         self.sample1 = UbiomeSample(fname1)
         self.sample2 = UbiomeSample(fname2)
