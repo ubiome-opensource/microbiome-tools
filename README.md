@@ -16,3 +16,7 @@ Given two samples, output which rows are the uniquely found in one but not the o
 
 * [__convert_json_files_to_csv__](./docs/convertJsonToCSV.md) Convert all JSON files in a
 directory to CSV files, suitable for reading in Excel or use with the other functions here.
+
+**[uBiome JSON to D3 Tree Graph](https://github.com/jrrera/ubiome-to-d3)** A lightweight
+JavaScript library that generates an interactive D3 tree visualization from
+your uBiome JSON data.
