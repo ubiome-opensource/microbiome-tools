@@ -2,7 +2,7 @@
 
 Please add your tools here, and edit this file to keep a directory of scripts, programs, templates, or anything else you find useful for manipulating or analyzing uBiome information.
 
-**[ubiome: Python module](./docs/compareSamplesPython.md)** If you have a Mac, this is the easiest script to run. You won't need to install anything new besides the script. Just follow the instructions. The same script also works as a module you can import into other Python programs.
+**[ubiome.py: Python module](./docs/compareSamplesPython.md)** Compare any two uBiome samples to find unique taxa (bacteria) or to show the difference in counts. If you have a Mac, the script works without installing anything else.
 
 
 **[RuBiome: simple scripts in R](./docs/RuBiomeTools.md)**
