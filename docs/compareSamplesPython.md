@@ -1,15 +1,24 @@
-# Compare two uBiome samples (Python)
+## Analyze uBiome samples in Python
 
-Download the script [ubiome.py](../ubiome.py) to the same folder where you have two uBiome taxonomy files you want to compare. 
 
-## Command line version (easiest)
+[ubiome.py](../ubiome.py) works as either a script or a module that can `import` into your own code. It can do the following:
 
-On the Macintosh, open the ```Terminal``` application and at the prompt type:
+* Compare two samples to find the unique organisms in each.
+* Compare two samples and show the differences in counts for each.
+* Merge more than one sample into a single large spreadsheet.
+
+## Compare two samples
+
+
+### Command line version (easiest)
+
+Download the file [ubiome.py](../ubiome.py) to the same folder where you have two uBiome taxonomy files you want to compare. 
+
+On the Macintosh, open the ```Terminal``` application and in the directory where you downloaded the files, type:
 
 ```
 > python ubiome.py -h
 ```
-
 You should see the following:
 
 ```
@@ -71,7 +80,7 @@ Write your own Python script. Here's an example using JSON files from the curren
 	aprJuluPretty = aprJulu.prettyPrint() 
 	aprJulu.writeCSV("AprJulUnique.csv")  # or write to a CSV file on disk
 
-
+## Combine multiple uBiome JSON files into a single spreadsheet (CSV)
 You can also merge several sample files together to make a big CSV file where the first row is all the taxons ever found in your samples, and the other columns are your different samples, with rows containing the `count_norm` for every taxon.  
 
 Example, given two samples (JSON files read from current directory)
