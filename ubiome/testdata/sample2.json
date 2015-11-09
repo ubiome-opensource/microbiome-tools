@@ -1,0 +1,184 @@
+{
+  "ubiome_bacteriacounts": [
+    {
+      "taxon": "2",
+      "parent": "131567",
+      "count": "17299",
+      "count_norm": "1000000",
+      "avg": null,
+      "tax_name": "Bacteria",
+      "tax_rank": "superkingdom",
+      "tax_color": null
+    },
+    {
+      "taxon": "1239",
+      "parent": "2",
+      "count": "8016",
+      "count_norm": "463379",
+      "avg": null,
+      "tax_name": "Firmicutes",
+      "tax_rank": "phylum",
+      "tax_color": "5E6591"
+    },
+    {
+      "taxon": "186801",
+      "parent": "1239",
+      "count": "7699",
+      "count_norm": "445055",
+      "avg": null,
+      "tax_name": "Clostridia",
+      "tax_rank": "class",
+      "tax_color": null
+    },
+    {
+      "taxon": "186802",
+      "parent": "186801",
+      "count": "7699",
+      "count_norm": "445055",
+      "avg": null,
+      "tax_name": "Clostridiales",
+      "tax_rank": "order",
+      "tax_color": null
+    },
+    {
+      "taxon": "976",
+      "parent": "68336",
+      "count": "5177",
+      "count_norm": "299266",
+      "avg": null,
+      "tax_name": "Bacteroidetes",
+      "tax_rank": "phylum",
+      "tax_color": "e65848"
+    },
+    {
+      "taxon": "68336",
+      "parent": "2",
+      "count": "5177",
+      "count_norm": "299266",
+      "avg": null,
+      "tax_name": "Bacteroidetes/Chlorobi group",
+      "tax_rank": "superphylum",
+      "tax_color": null
+    },
+    {
+      "taxon": "541000",
+      "parent": "186802",
+      "count": "3144",
+      "count_norm": "181745",
+      "avg": null,
+      "tax_name": "Ruminococcaceae",
+      "tax_rank": "family",
+      "tax_color": null
+    },
+    {
+      "taxon": "171549",
+      "parent": "200643",
+      "count": "2817",
+      "count_norm": "162842",
+      "avg": null,
+      "tax_name": "Bacteroidales",
+      "tax_rank": "order",
+      "tax_color": null
+    },
+    {
+      "taxon": "200643",
+      "parent": "976",
+      "count": "2817",
+      "count_norm": "162842",
+      "avg": null,
+      "tax_name": "Bacteroidia",
+      "tax_rank": "class",
+      "tax_color": null
+    },
+    {
+      "taxon": "203494",
+      "parent": "74201",
+      "count": "340",
+      "count_norm": "19654",
+      "avg": null,
+      "tax_name": "Verrucomicrobiae",
+      "tax_rank": "class",
+      "tax_color": null
+    },
+    {
+      "taxon": "51290",
+      "parent": "2",
+      "count": "340",
+      "count_norm": "19654",
+      "avg": null,
+      "tax_name": "Chlamydiae/Verrucomicrobia group",
+      "tax_rank": "superphylum",
+      "tax_color": null
+    },
+    {
+      "taxon": "74201",
+      "parent": "51290",
+      "count": "340",
+      "count_norm": "19654",
+      "avg": null,
+      "tax_name": "Verrucomicrobia",
+      "tax_rank": "phylum",
+      "tax_color": "fdc536"
+    },
+    {
+      "taxon": "52022",
+      "parent": "65551",
+      "count": "203",
+      "count_norm": "11735",
+      "avg": null,
+      "tax_name": "Meiothermus silvanus",
+      "tax_rank": "species",
+      "tax_color": null
+    },
+    {
+      "taxon": "65551",
+      "parent": "188786",
+      "count": "203",
+      "count_norm": "11735",
+      "avg": null,
+      "tax_name": "Meiothermus",
+      "tax_rank": "genus",
+      "tax_color": null
+    },
+    {
+      "taxon": "1654",
+      "parent": "2049",
+      "count": "9",
+      "count_norm": "520",
+      "avg": null,
+      "tax_name": "Actinomyces",
+      "tax_rank": "genus",
+      "tax_color": null
+    },
+    {
+      "taxon": "574697",
+      "parent": "171551",
+      "count": "3",
+      "count_norm": "173",
+      "avg": null,
+      "tax_name": "Butyricimonas",
+      "tax_rank": "genus",
+      "tax_color": null
+    },
+    {
+      "taxon": "1217281",
+      "parent": "574697",
+      "count": "3",
+      "count_norm": "173",
+      "avg": null,
+      "tax_name": "Butyricimonas sp. 214-4",
+      "tax_rank": "species",
+      "tax_color": null
+    },
+    {
+      "taxon": "649756",
+      "parent": "207244",
+      "count": "3",
+      "count_norm": "173",
+      "avg": null,
+      "tax_name": "Anaerostipes hadrus",
+      "tax_rank": "species",
+      "tax_color": null
+    }
+  ]
+}
