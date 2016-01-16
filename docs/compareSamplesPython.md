@@ -1,7 +1,7 @@
 ## Analyze uBiome samples in Python
 
 
-[ubiome.py](../ubiome.py) works as either a script or a module that can `import` into your own code. It can do the following:
+The [ubiome Python library](../ubiome) works as either a script or a module that you can `import` into your own code. It can do the following:
 
 * Compare two samples to find the unique organisms in each.
 * Compare two samples and show the differences in counts for each.
@@ -12,17 +12,16 @@
 
 ### Command line version (easiest)
 
-Download the file [ubiome.py](../ubiome.py) to the same folder where you have two uBiome taxonomy files you want to compare. 
+Download the folder [ubiome](../ubiome) to the same folder where you have two uBiome taxonomy files you want to compare. 
 
 On the Macintosh, open the ```Terminal``` application and in the directory where you downloaded the files, type:
 
 ```
-> python ubiome.py -h
+> python -m ubiome.ubiome -h
 ```
 You should see the following:
 
 ```
-
 usage: ubiome.py [-h] [-c COMPARE] [-u UNIQUE] [-d DEBUG] sample2
 
 positional arguments:
@@ -36,14 +35,14 @@ optional arguments:
                         Find items in sample1 not in sample2
   -d DEBUG, --debug DEBUG
                         turn debug mode to run tests
-                        
-```
+
+```                      
 
 To compare two samples, type:
 
 ```
-> python ubiome.py -c sample1.json sample2.json
 
+> python ubiome.py -c sample1.json sample2.json
 ```
 
 You will see several lines of comma-separated values indicating the difference in `count_norm` values between the two samples.
@@ -51,14 +50,13 @@ You will see several lines of comma-separated values indicating the difference i
 You can also type the following to save the results to the file "compare12.csv"
 
 ```
-> python ubiome.py -c sample1.json sample2.json > compare12.csv
-
+> python -m ubiome.ubiome -c sample1.json sample2.json > compare12.csv
 ```
 
 Similarly, to see the unique organisms in one sample compared to the other, type:
 
 ```
-> python ubiome.py -u sample1.json sample2.json > unique12.csv
+> python -m ubiome.ubiome -u sample1.json sample2.json
 
 ```
 
