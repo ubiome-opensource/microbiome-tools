@@ -19,18 +19,16 @@ class UbiomeMultiSample():
 
 
     """
-
-    def __init__(self, newSample=[]):
+    def __init__(self,newSample = []):
         """
-
-            :rtype: UbiomeMultiSample
-            """
-        self.fullTaxList = [["tax_name", "tax_rank"]]
+        :rtype: UbiomeMultiSample
+        """
+        self.fullTaxList = [["tax_name","tax_rank"]]
         self.samples = []
         if newSample:
-            self.fullTaxList += newSample.taxnames()
-            #            self.samples+=[[newSample.name]+[sample["count_norm"] for sample in newSample.sampleList]]
-            self.samples += [[newSample.name] + [sample.count_norm for sample in newSample.taxaList]]
+            self.fullTaxList +=newSample.taxnames()
+#            self.samples+=[[newSample.name]+[sample["count_norm"] for sample in newSample.sampleList]]
+            self.samples+=[[newSample.name]+[sample.count_norm for sample in newSample.taxaList]]
 
 
     def alltaxa(self):
@@ -74,11 +72,11 @@ class UbiomeMultiSample():
         newTaxNamesL = []
         sampleTaxNames = sample2.taxnames()
 
-        Sample2ZippedList = sample2.taxnames()
-        justSample2TaxNames, justSample2TaxRanks = zip(*Sample2ZippedList)
-        justFullTaxNames, justFullTaxRanks = zip(*self.fullTaxList)
+        #Sample2ZippedList = sample2.taxnames()
+        #justSample2TaxNames, justSample2TaxRanks = zip(*Sample2ZippedList)
+       # justFullTaxNames, justFullTaxRanks = zip(*self.fullTaxList)
 
-        newTaxRanksL = []
+        #newTaxRanksL = []
         for i,taxName in enumerate(sampleTaxNames):
             if taxName not in self.fullTaxList:
                 newTaxNamesL+=[taxName]

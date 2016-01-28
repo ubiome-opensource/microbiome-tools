@@ -18,7 +18,11 @@ from argparse import ArgumentParser
 
 #todo add __repl__ and __str__ to classes
 
-
+INVALID_TAXON = -1
+INVALID_COLOR = -2
+INVALID_RANK = -3
+INVALID_AVG = -4
+INVALID_COUNT = -5
 
 class UbiomeTaxa():
     '''Abstracts the keys from the uBiome JSON file, making it easier to update if the format changes.
@@ -42,21 +46,21 @@ class UbiomeTaxa():
     '''
     def __init__(self, ubiomeDict):
         assert(isinstance(ubiomeDict,dict))
-        self._parent = ubiomeDict.get('parent',"unknown parent")
+        self._parent = ubiomeDict.get('parent',INVALID_TAXON)
         #self._count = int(ubiomeDict.get('count')) #,"unknown count"))
         try: self._count = int(ubiomeDict.get('count'))
         except TypeError:
-            self._count = "unknown count"
+            self._count = INVALID_COUNT
 
         try: self._count_norm = int(ubiomeDict.get('count_norm'))
         except TypeError:
-            self._count_norm = "unknown count_norm"
+            self._count_norm = INVALID_COUNT
         #self._count_norm=int(ubiomeDict.get('count_norm')) #,"unknown count_norm"))
-        self._taxon = ubiomeDict.get('taxon',"unknown taxon")
+        self._taxon = ubiomeDict.get('taxon',INVALID_TAXON)
         self._tax_name = ubiomeDict.get('tax_name',"unknown tax_name")
-        self._tax_rank = ubiomeDict.get('tax_rank', "unknown tax_rank")
-        self._avg = ubiomeDict.get('avg',"unknown avg")
-        self._tax_color = ubiomeDict.get('tax_color',"unknown tax_color")
+        self._tax_rank = ubiomeDict.get('tax_rank', INVALID_RANK)
+        self._avg = ubiomeDict.get('avg',INVALID_AVG)
+        self._tax_color = ubiomeDict.get('tax_color',INVALID_COLOR)
 
     def __repr__(self):
         return "<ubiome.ubiome.ubiomeDict: "+self.tax_name + ">"
