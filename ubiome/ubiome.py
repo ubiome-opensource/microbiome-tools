@@ -173,7 +173,7 @@ class UbiomeSample():
         sourceJson = json.load(jsonFile)
         self.set_taxaList_JSON(sourceJson)
 
-    def readCSVfile(self,fname):
+    def read_CSV_file(self, fname):
         """
         read a CSV-formatted version of the uBiome taxonomy data.
         :param fname:
@@ -183,7 +183,7 @@ class UbiomeSample():
         sourceCSV = csv.DictReader(csvFile)
         header = sourceCSV.fieldnames
         for row in sourceCSV:
-            self.taxaList+=[UbiomeTaxa(row)]
+            self._taxaList+=[UbiomeTaxa(row)]
 
 
 # todo make explicit return values

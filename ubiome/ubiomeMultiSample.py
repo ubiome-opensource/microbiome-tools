@@ -19,13 +19,18 @@ class UbiomeMultiSample():
 
 
     """
-    def __init__(self,newSample = []):
-        self.fullTaxList = [["tax_name","tax_rank"]]
+
+    def __init__(self, newSample=[]):
+        """
+
+            :rtype: UbiomeMultiSample
+            """
+        self.fullTaxList = [["tax_name", "tax_rank"]]
         self.samples = []
         if newSample:
-            self.fullTaxList +=newSample.taxnames()
-#            self.samples+=[[newSample.name]+[sample["count_norm"] for sample in newSample.sampleList]]
-            self.samples+=[[newSample.name]+[sample.count_norm for sample in newSample.taxaList]]
+            self.fullTaxList += newSample.taxnames()
+            #            self.samples+=[[newSample.name]+[sample["count_norm"] for sample in newSample.sampleList]]
+            self.samples += [[newSample.name] + [sample.count_norm for sample in newSample.taxaList]]
 
 
     def alltaxa(self):

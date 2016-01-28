@@ -5,7 +5,10 @@ import unittest
 # I recognize it's not ideal to import straight from the current directory
 # eventually all tests should be moved out of the package directory, or find a better way to do this.
 import ubiome
+
 import ubiomeMultiSample
+
+#from ..ubiome import UbiomeMultiSample
 
 pathPrefix="./testdata/"
 s1 = ubiome.UbiomeSample(pathPrefix+"sample1.json",name="sample1")
@@ -13,7 +16,7 @@ s2 = ubiome.UbiomeSample(pathPrefix+"sample2.json",name="sample2")
 may14 = ubiome.UbiomeSample(pathPrefix+"Sprague-ubiomeMay2014.json",name="May 2014")
 jun14 = ubiome.UbiomeSample(pathPrefix+"sprague-uBiomeJun2014.json",name="Jun 2014")
 # jun14 = ubiome.UbiomeSample(name="Jun 2014")
-# jun14.readCSVfile(pathPrefix+"sprague-uBiomeJun2014.csv")
+# jun14.read_CSV_file(pathPrefix+"sprague-uBiomeJun2014.csv")
 #oct14 = ubiome.UbiomeSample(pathPrefix+"Sprague-uBiomeOct2014.json",name="Oct 2014")
 # jan = ubiome.UbiomeSample(pathPrefix+"sprague-ubiomeJan2015x.json",name="Jan 2015")
 # feb = ubiome.UbiomeSample(pathPrefix+"sprague-ubiomeFeb2015.json",name="Feb 2015")
@@ -22,7 +25,7 @@ jun14 = ubiome.UbiomeSample(pathPrefix+"sprague-uBiomeJun2014.json",name="Jun 20
 # aprB = ubiome.UbiomeSample(pathPrefix+"sprague-ubiome-150428.json",name = "Apr28")
 #jul = ubiome.UbiomeSample(pathPrefix+"Sprague-ubiomeJul2015.json",name = "Jun 2015")
 aug15 = ubiome.UbiomeSample(name="Aug 2015")
-aug15.readCSVfile(pathPrefix+"Sprague-ubiome-150815.csv")
+aug15.read_CSV_file(pathPrefix + "Sprague-ubiome-150815.csv")
 aug = aug15 #ubiome.UbiomeSample(pathPrefix+"Sprague-ubiome-150815.json",name = "Aug 2015")
 
 
@@ -30,7 +33,6 @@ class MyTestCase(unittest.TestCase):
 
     def setUp(self):
         x = ubiomeMultiSample.UbiomeMultiSample(may14)
-
         x.merge(jun14)
        # x.merge(oct14)
         # x.merge(jan)
