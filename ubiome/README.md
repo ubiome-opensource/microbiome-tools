@@ -10,6 +10,8 @@ This library will help you look at the JSON summary.
 Main Functions
 ---
 
+Until we have more documentation written, please see the [ubiome-example](microbiome-tools/ubiome_example.py) to see how this works.
+
 The following classes let you manipulate the uBiome taxonomy data:
 
 *UbiomeSample*
