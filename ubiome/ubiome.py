@@ -199,7 +199,7 @@ class UbiomeSample():
         try:
             __import__("prettytable")
         except ImportError:
-            #print("no prettyprint available")
+            print("no prettyprint available")
             pTable = "Tax_Name\tTax_Rank\tCount_Norm\n"
             for tax in self.taxaList:
                 pTable+=tax.tax_name+"\t"+tax.tax_rank + "\t" + str(tax.percent) + "\n"
@@ -254,7 +254,7 @@ class UbiomeSample():
 
     def diversity(self, rank="species"):
         """ uses Simpson index: http://codegolf.stackexchange.com/questions/53455/simpson-diversity-index
-        :return int
+        :return float
         """
         l = len(self.taxaList)
         s = [(taxa.tax_name,int(taxa.count_norm)) for taxa in self.taxaList if taxa.tax_rank == rank]
@@ -272,8 +272,6 @@ class UbiomeSample():
         for taxa in self.taxaList:
             if taxa.tax_name == taxName:
                 return getattr(taxa,field)
-
-
 
     def countNormOf(self, taxName):
         """
