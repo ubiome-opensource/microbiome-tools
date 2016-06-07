@@ -21,15 +21,6 @@ s3 = ubiome.UbiomeSample(pathPrefix+"sample3.json",name="sample2")
 s4 = ubiome.UbiomeSample(pathPrefix+"sample4.json",name="sample2")
 may14 = ubiome.UbiomeSample(pathPrefix+"Sprague-ubiomeMay2014.json",name="May 2014")
 jun14 = ubiome.UbiomeSample(pathPrefix+"sprague-uBiomeJun2014.json",name="Jun 2014")
-# jun14 = ubiome.UbiomeSample(name="Jun 2014")
-# jun14.read_CSV_file(pathPrefix+"sprague-uBiomeJun2014.csv")
-#oct14 = ubiome.UbiomeSample(pathPrefix+"Sprague-uBiomeOct2014.json",name="Oct 2014")
-# jan = ubiome.UbiomeSample(pathPrefix+"sprague-ubiomeJan2015x.json",name="Jan 2015")
-# feb = ubiome.UbiomeSample(pathPrefix+"sprague-ubiomeFeb2015.json",name="Feb 2015")
-#
-# aprA = ubiome.UbiomeSample(pathPrefix+"sprague-ubiome-150421.json",name = "Apr21")
-# aprB = ubiome.UbiomeSample(pathPrefix+"sprague-ubiome-150428.json",name = "Apr28")
-#jul = ubiome.UbiomeSample(pathPrefix+"Sprague-ubiomeJul2015.json",name = "Jun 2015")
 aug15 = ubiome.UbiomeSample(name="Aug 2015")
 aug15.read_CSV_file(pathPrefix + "Sprague-ubiome-150815.csv")
 aug = aug15 #ubiome.UbiomeSample(pathPrefix+"Sprague-ubiome-150815.json",name = "Aug 2015")
@@ -40,12 +31,6 @@ class MyTestCase(unittest.TestCase):
     def setUp(self):
         x = ubiomeMultiSample.UbiomeMultiSample(may14)
         x.merge(jun14)
-       # x.merge(oct14)
-        # x.merge(jan)
-        # x.merge(feb)
-   #     x.merge(aprA)
-   #     x.merge(aprB)
-        #x.merge(jul)
         x.merge(aug)
         self.sampleMultiSample = x
 

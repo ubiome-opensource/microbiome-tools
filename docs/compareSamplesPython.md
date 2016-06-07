@@ -7,12 +7,15 @@ The [ubiome Python library](../ubiome) works as either a script or a module that
 * Compare two samples and show the differences in counts for each.
 * Merge more than one sample into a single large spreadsheet.
 
+If you are already familiar with the basics of Python programming, see the script [ubiome_example.py](ubiome_example.py) for a complete example.
+
+
 ## Compare two samples
 
 
 ### Command line version (easiest)
 
-Download the folder [ubiome](../ubiome) to the same folder where you have two uBiome taxonomy files you want to compare. 
+Download the folder [ubiome](../ubiome) to the same folder where you have two uBiome taxonomy files you want to compare.
 
 On the Macintosh, open the ```Terminal``` application and in the directory where you downloaded the files, type:
 
@@ -79,7 +82,9 @@ Write your own Python script. Here's an example using JSON files from the curren
 	aprJulu.writeCSV("AprJulUnique.csv")  # or write to a CSV file on disk
 
 ## Combine multiple uBiome JSON files into a single spreadsheet (CSV)
-You can also merge several sample files together to make a big CSV file where the first row is all the taxons ever found in your samples, and the other columns are your different samples, with rows containing the `count_norm` for every taxon.  
+You can also merge several sample files together to make a big CSV file where the
+first row is all the taxons ever found in your samples, and the other columns are your different samples, with rows containing the `count_norm` for every taxon.
+
 
 Example, given two samples (JSON files read from current directory)
 
@@ -90,7 +95,6 @@ Example, given two samples (JSON files read from current directory)
     x.writeCSV("combinedResults.csv")
     
 This will leave you the file "combinedResults.csv" with the combined `count_norm`s for your two samples
-
 
 
 

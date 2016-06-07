@@ -113,23 +113,20 @@ class UbiomeTaxa():
     def tax_rank(self):
         return self._tax_rank
 
-
-
-
-
-
-
 # A sampleList is a list of dictionaries, each of which is a field from the standard uBiome JSON taxonomy
 # _taxalist is the same thing, only made of elements of class UbiomeTaxa
+
 
 class UbiomeSample():
     """ class representation of a well-formed uBiome sample
 
     """
 
-    def __init__(self,fname=[],name=[], date=datetime.date(2000,1,1), site="gut"):
+    def __init__(self,fname="",name="", date=datetime.date(2000,1,1), site="gut"):
         """ initialize with a string representing the path to a uBiome-formatted JSON file
         If no name, just instantiate an object; you can read the contents later using readJSONFile or readCSVFile
+        :param fname : str
+        :param name: str
         """
         self.date = date
         self.site = site
@@ -152,7 +149,6 @@ class UbiomeSample():
         :return: list
         """
         return self._taxaList
-
 
     def set_taxaList_JSON(self,sourceJson):
         """
@@ -209,7 +205,7 @@ class UbiomeSample():
     def read_CSV_file(self, fname):
         """
         read a CSV-formatted version of the uBiome taxonomy data.
-        :param fname:
+        :param fname: str
         :return:
         """
         csvFile = open(fname)
@@ -243,11 +239,10 @@ class UbiomeSample():
             #print(uniqueTable)
             return uniqueTable
 
-
-    def sort(self,sortBy="tax_name"):
+    def sort(self, sortBy = "tax_name"):
         """
-        sort the sample (mutably) by sortBy (which is any of the JSON headers)
-        :param str sortBy: any of the valid JSON headers
+        sort the sample (mutably) by sortBy (which can be any of the taxonomy file keys)
+        :param  sortBy: str:  any of the valid taxonomy file keys
         :return: bool
         """
         #self._taxaList = sorted(self._taxaList,key=lambda k:k.__getattribute__(sortBy),reverse=True)
@@ -259,6 +254,7 @@ class UbiomeSample():
     def showContents(self):
         """ display the highlights of this sample (useful for debugging)
 
+        :rtype: None
         :return:
         """
         l = len(self.taxaList)
@@ -268,7 +264,6 @@ class UbiomeSample():
             print(self._taxaList[i])
             l=l-1
             i+=1
-
 
     def taxnames(self):
         """ returns a list of all organisms in this sample
@@ -280,7 +275,6 @@ class UbiomeSample():
             self._taxnamelist = self._taxnamelist + [[taxon.tax_name,taxon.tax_rank]]
         return self._taxnamelist
 
-
     def diversity(self, rank="species"):
         """ uses Simpson index: http://codegolf.stackexchange.com/questions/53455/simpson-diversity-index
         :return float
@@ -291,7 +285,6 @@ class UbiomeSample():
         eT, eN =  list(zip(*s))
         d = 1 - sum([eN[i]*(eN[i]-1) for i,j in enumerate(eN)])/(sum(eN)*(sum(eN)-1))
         return d # sum(s[i%l]<>s[i/l]for i in range(l*l))/(l-1.)/l
-
 
     def taxaField(self,taxName, field):
         ''' look up taxName in _taxaList and return its attribute corresponding to 'field'

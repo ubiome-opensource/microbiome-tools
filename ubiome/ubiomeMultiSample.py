@@ -1,6 +1,7 @@
 
 import sys
 import csv
+from ubiome import UbiomeSample
 
 class UbiomeMultiSample(object):
     """
@@ -21,6 +22,7 @@ class UbiomeMultiSample(object):
     """
     def __init__(self,newSample = []):
         """
+        : param newSample: UbiomeSample.UbiomeSample
         :rtype: UbiomeMultiSample
         """
         self.fullTaxList = [["tax_name","tax_rank"]]
