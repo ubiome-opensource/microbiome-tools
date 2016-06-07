@@ -131,14 +131,15 @@ class UbiomeSample():
         """ initialize with a string representing the path to a uBiome-formatted JSON file
         If no name, just instantiate an object; you can read the contents later using readJSONFile or readCSVFile
         """
+        self.date = date
+        self.site = site
         if fname:
             self.readJSONfile(fname)
         else:
             #self.sampleList = []
             self._taxaList = []
         self._taxnamelist=[]
-        self.date = date
-        self.site = site
+
         if not name:
             self.name = fname
         else:
@@ -175,6 +176,34 @@ class UbiomeSample():
         #print("current directory = ", os.getcwd())
         jsonFile = open(fname)
         sourceJson = json.load(jsonFile)
+        try:
+            site = sourceJson['site']
+            self.site = site
+        except KeyError:
+            pass # keep the default site name
+        try:
+            date_str = sourceJson['sampling_time']
+            self.datetime = datetime.datetime.strptime(date_str,"%Y-%m-%d %H:%M")
+            self.date = datetime.date(self.datetime.year,self.datetime.month,self.datetime.day)
+        except KeyError:
+            try:
+                date_str = sourceJson['dateSampled']
+                if date_str:
+                    self.datetime = datetime.datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%fZ")
+                    self.date = datetime.date(self.datetime.year, self.datetime.month, self.datetime.day)
+            except KeyError:
+                # self.date = datetime.date(2000,1,1)
+                self.datetime = datetime.datetime(self.date.year,self.date.month,self.date.day,0,0)
+        try:
+            self.notes = sourceJson['notes']
+        except KeyError:
+            self.notes = ""
+        try:
+            self.sequencing_revision = sourceJson['sequencing_revision']
+        except KeyError:
+            self.sequencing_revision = "0"
+        self.sequencing_revision = int(self.sequencing_revision)
+
         self.set_taxaList_JSON(sourceJson)
 
     def read_CSV_file(self, fname):

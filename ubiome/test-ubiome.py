@@ -1,6 +1,10 @@
 __author__ = 'sprague'
 
 import unittest
+import datetime
+
+
+
 
 # I recognize it's not ideal to import straight from the current directory
 # eventually all tests should be moved out of the package directory, or find a better way to do this.
@@ -13,6 +17,8 @@ import ubiomeMultiSample
 pathPrefix="./testdata/"
 s1 = ubiome.UbiomeSample(pathPrefix+"sample1.json",name="sample1")
 s2 = ubiome.UbiomeSample(pathPrefix+"sample2.json",name="sample2")
+s3 = ubiome.UbiomeSample(pathPrefix+"sample3.json",name="sample2")
+s4 = ubiome.UbiomeSample(pathPrefix+"sample4.json",name="sample2")
 may14 = ubiome.UbiomeSample(pathPrefix+"Sprague-ubiomeMay2014.json",name="May 2014")
 jun14 = ubiome.UbiomeSample(pathPrefix+"sprague-uBiomeJun2014.json",name="Jun 2014")
 # jun14 = ubiome.UbiomeSample(name="Jun 2014")
@@ -110,6 +116,14 @@ class MyTestCase(unittest.TestCase):
     def test_alltaxa_isList(self):
         self.assertEqual(len(self.sampleMultiSample.alltaxa()),795)
 
+    def test_found_metadata(self):
+        self.assertEqual(s3.datetime, datetime.datetime(2016,1,11,0,0))
+        self.assertEqual(s3.site,"mouth")
+        self.assertEqual(s2.site,"gut")
+        self.assertEqual(s1.datetime,datetime.datetime(2000,1,1,0,0))
+        self.assertEqual(s1.date, datetime.date(2000, 1, 1))
+        self.assertEqual(s4.date, datetime.date(2015, 8, 22))
+        self.assertEqual(s4.datetime,datetime.datetime(2015,8,22,3,0))
 
     def tearDown(self):
         pass

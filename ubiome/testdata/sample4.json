@@ -1,0 +1,209 @@
+{"version":"2016-05-24T16:53:15.812Z",
+  "site":"Gut",
+  "dateSampled":"2015-08-22T03:00:00.000Z",
+  "dateProcessed":"2015-09-21T01:32:59.000Z",
+  "notes":null,
+  "ubiome_bacteriacounts": [
+    {
+      "taxon": "2",
+      "parent": "131567",
+      "count": "252684",
+      "count_norm": "1000000",
+      "avg": null,
+      "tax_name": "Bacteria",
+      "tax_rank": "superkingdom",
+      "tax_color": null
+    },
+    {
+      "taxon": "1239",
+      "parent": "2",
+      "count": "157391",
+      "count_norm": "622877",
+      "avg": null,
+      "tax_name": "Firmicutes",
+      "tax_rank": "phylum",
+      "tax_color": "5E6591"
+    },
+    {
+      "taxon": "39948",
+      "parent": "31977",
+      "count": "1526",
+      "count_norm": "6039",
+      "avg": null,
+      "tax_name": "Dialister",
+      "tax_rank": "genus",
+      "tax_color": null
+    },
+    {
+      "taxon": "872",
+      "parent": "194924",
+      "count": "202",
+      "count_norm": "799",
+      "avg": null,
+      "tax_name": "Desulfovibrio",
+      "tax_rank": "genus",
+      "tax_color": null
+    },
+    {
+      "taxon": "134222",
+      "parent": "872",
+      "count": "202",
+      "count_norm": "799",
+      "avg": null,
+      "tax_name": "environmental samples",
+      "tax_rank": "no_rank",
+      "tax_color": null
+    },
+    {
+      "taxon": "134223",
+      "parent": "134222",
+      "count": "197",
+      "count_norm": "780",
+      "avg": null,
+      "tax_name": "Desulfovibrio sp. oral clone BB161",
+      "tax_rank": "species",
+      "tax_color": null
+    },
+    {
+      "taxon": "592978",
+      "parent": "1263",
+      "count": "195",
+      "count_norm": "772",
+      "avg": null,
+      "tax_name": "Ruminococcus faecis",
+      "tax_rank": "species",
+      "tax_color": null
+    },
+
+    {
+      "taxon": "976",
+      "parent": "68336",
+      "count": "64618",
+      "count_norm": "255727",
+      "avg": null,
+      "tax_name": "Bacteroidetes",
+      "tax_rank": "phylum",
+      "tax_color": "e65848"
+    },
+    {
+      "taxon": "200643",
+      "parent": "976",
+      "count": "64570",
+      "count_norm": "255537",
+      "avg": null,
+      "tax_name": "Bacteroidia",
+      "tax_rank": "class",
+      "tax_color": null
+    },
+    {
+      "taxon": "171549",
+      "parent": "200643",
+      "count": "64514",
+      "count_norm": "255315",
+      "avg": null,
+      "tax_name": "Bacteroidales",
+      "tax_rank": "order",
+      "tax_color": null
+    },
+    {
+      "taxon": "291644",
+      "parent": "816",
+      "count": "189",
+      "count_norm": "748",
+      "avg": null,
+      "tax_name": "Bacteroides salyersiae",
+      "tax_rank": "species",
+      "tax_color": null
+    },
+    {
+      "taxon": "691811",
+      "parent": "1485",
+      "count": "185",
+      "count_norm": "732",
+      "avg": null,
+      "tax_name": "Clostridium sp. AUH-JLC235",
+      "tax_rank": "species",
+      "tax_color": null
+    },
+    {
+      "taxon": "186806",
+      "parent": "186802",
+      "count": "161",
+      "count_norm": "637",
+      "avg": null,
+      "tax_name": "Eubacteriaceae",
+      "tax_rank": "family",
+      "tax_color": null
+    },
+    {
+      "taxon": "1308",
+      "parent": "1301",
+      "count": "160",
+      "count_norm": "633",
+      "avg": null,
+      "tax_name": "Streptococcus thermophilus",
+      "tax_rank": "species",
+      "tax_color": null
+    },
+    {
+      "taxon": "116085",
+      "parent": "33042",
+      "count": "158",
+      "count_norm": "625",
+      "avg": null,
+      "tax_name": "Coprococcus catus",
+      "tax_rank": "species",
+      "tax_color": null
+    },
+    {
+      "taxon": "1229957",
+      "parent": "361210",
+      "count": "158",
+      "count_norm": "625",
+      "avg": null,
+      "tax_name": "Porphyromonadaceae bacterium AIP925.11",
+      "tax_rank": "species",
+      "tax_color": null
+    },
+    {
+      "taxon": "361210",
+      "parent": "171551",
+      "count": "158",
+      "count_norm": "625",
+      "avg": null,
+      "tax_name": "unclassified Porphyromonadaceae",
+      "tax_rank": "no_rank",
+      "tax_color": null
+    },
+    {
+      "taxon": "216572",
+      "parent": "186802",
+      "count": "154",
+      "count_norm": "609",
+      "avg": null,
+      "tax_name": "Oscillospiraceae",
+      "tax_rank": "family",
+      "tax_color": null
+    },
+    {
+      "taxon": "867900",
+      "parent": "979",
+      "count": "2",
+      "count_norm": "8",
+      "avg": null,
+      "tax_name": "Cellulophaga lytica DSM 7489",
+      "tax_rank": "no_rank",
+      "tax_color": null
+    },
+    {
+      "taxon": "341694",
+      "parent": "1257",
+      "count": "2",
+      "count_norm": "8",
+      "avg": null,
+      "tax_name": "Peptostreptococcus stomatis",
+      "tax_rank": "species",
+      "tax_color": null
+    }
+  ]
+}
