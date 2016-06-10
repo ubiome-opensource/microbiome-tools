@@ -6,28 +6,26 @@ Home-page: https://github.com/ubiome-opensource/microbiome-tools
 Author: Richard Sprague
 Author-email: sprague@ubiome.com
 License: MIT
-Description: #Using the uBiome Tools Repository
+Download-URL: https://github.com/ubiome-opensource/microbiome-tools/0.8
+Description: Using the uBiome Tools Repository
+        =================================
         
-        Please add your tools here, and edit this file to keep a directory of scripts, programs, templates, or anything else you find useful for manipulating or analyzing uBiome information.
+        uBiome is a citizen science company that collects and analyzes samples of the human microbiome. Send them your sample and they will process it using the information contained in the 16S subregion of the bacterial genome and send you the results.
         
-        **[ubiome.py: Python module](./docs/compareSamplesPython.md)** Compare any two uBiome samples to find unique taxa (bacteria) or to show the difference in counts. If you have a Mac, the script works without installing anything else.
+        Advanced users have access to the raw data, including the original FASTQ files from uBiome's Illumina NextSeq500 machine as well as a JSON-encapsulated summary of the results.
         
+        This library will help you look at the JSON summary.
         
-        **[RuBiome: simple scripts in R](./docs/RuBiomeTools.md)**
+        The following classes let you manipulate the uBiome taxonomy data:
         
+        *UbiomeSample*
         
-        * [__uBiome_compare_samples__](./docs/compareSamples.md)
-        Given two samples, output all the differences, including the difference in count_norm
+        *UbiomeDiffSample*
         
-        * [__uBiome_sample_unique__](./docs/findUnique.md)
-        Given two samples, output which rows are the uniquely found in one but not the other.
+        *UbiomeMultiSample*
         
-        * [__convert_json_files_to_csv__](./docs/convertJsonToCSV.md) Convert all JSON files in a
-        directory to CSV files, suitable for reading in Excel or use with the other functions here.
+        'UbiomeDiffSample','UbiomeMultiSample'
         
-        **[uBiome JSON to D3 Tree Graph](https://github.com/jrrera/ubiome-to-d3)** A lightweight
-        JavaScript library that generates an interactive D3 tree visualization from
-        your uBiome JSON data.
 Keywords: ubiome,microbiome,taxonomy
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
