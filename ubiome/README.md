@@ -7,40 +7,103 @@ Advanced users have access to the raw data, including the original FASTQ files f
 
 This library will help you look at the JSON summary.
 
-Until more documentation is available, please see the [ubiome-example](microbiome-tools/ubiome_example.py) to see how this works.
+Main Functions
+---
 
-## Super Short Intro
-
-If you already have your uBiome results downloaded and you know how to use a command line interface on your computer (either Terminal on a Mac or Powershell on Windows), type
+Until we have complete documentation, please see the [ubiome-example](microbiome-tools/ubiome_example.py) to see how this works.
 
 
-    $ pip install ubiome
+###Class uBiomeSample
 
-  to download the uBiome Python library from the Python Package Index.
 
-  Let's assume you already have two uBiome JSON files available in your current directory, like this:
-
-    $ ls
-    sample1.json  sample2.json
-    $ python
-    >>> from ubiome import *
-    >>> x1 = UbiomeSample("sample1.json")
-    >>> x2 = UbiomeSample("sample2.json")
-    >>> x = UbiomeMultiSample(x1)
-    >>> x.merge(x2)
-    >>> x.write("x.csv")
-    
-Your directory will now contain the file ```x.csv``` that has all your uBiome results laid out in a spreadsheet form like this:
-
-| tax_name                           | tax_rank     | sample1.json | sample2.json | 
-|------------------------------------|--------------|--------------|--------------| 
-| Bacteria                           | superkingdom | 1000000      | 1000000      | 
-| Firmicutes                         | phylum       | 622877       | 463379       | 
-| Dialister                          | genus        | 6039         | 0            | 
-| Desulfovibrio                      | genus        | 799          | 0            | 
-| environmental samples              | no_rank      | 799          | 0            | 
-| Desulfovibrio sp. oral clone BB161 | species      | 780          | 0            | 
-| Ruminococcus faecis                | species      | 772          | 0            | 
-| ...                                |              |              |              | 
-
-You should know what to do at this point. Filter by tax_rank, sort by column, etc.  If you want to convert everything to percentages, divide the integers by 10,000.
+    class UbiomeSample
+         |  class representation of a well-formed uBiome sample
+         |
+         |  Methods defined here:
+         |
+         |  __init__(self, fname='', name='', date=datetime.date(2000, 1, 1), site='gut')
+         |      initialize with a string representing the path to a uBiome-formatted JSON file
+         |      If no name, just instantiate an object; you can read the contents later using self.load()
+         |      :param fname : filename
+         |      :param name: name for the sample
+         |      :type name: str
+         |      :type fname: str
+         |      :type date: datetime.date
+         |
+         |  __repr__(self)
+         |
+         |  __str__(self)
+         |
+         |  addCountsToList(self, taxonList)
+         |      given a list of taxa, return another list, of dicts, that contain the same taxa and their corresponding count_norm
+         |      :param taxonList: list # contains taxnames
+         |      :return:
+         |
+         |  compareWith(self, sample2)
+         |      compare the current sample with sample2 and return a uBiomeDiffSample object of the differences
+         |
+         |      :param sample2: UbiomeSample
+         |      :type sample2: UbiomeSample
+         |      :return: UBiomeDiffSample
+         |      :rtype: UbiomeDiffSample
+         |
+         |  countNormOf(self, taxName)
+         |      returns the count_norm of a given taxName for a sample
+         |      :param taxName: string representation of a uBiome tax_name
+         |      :return:
+         |
+         |  diversity(self, rank='family')
+         |      uses Simpson index: http://codegolf.stackexchange.com/questions/53455/simpson-diversity-index
+         |
+         |      :param rank: specify the rank that will be used for the calculations. uBiome generally measures at the Family level.
+         |      :return float representing the inverse simpson diversity found in the sample.
+         |      :rtype float
+         |
+         |  load(self, fname, ftype='JSON')
+         |      read a JSON file of the uBiome taxonomy (the one you get from downloading from the uBiome web site)
+         |      :type fname: str
+         |      :param fname: the string filename containing JSON data
+         |      :param ftype: currently unused, but provided for future compatibility
+         |      :type ftype: str
+         |      :return:
+         |      :rtype None
+         |
+         |  prettyPrint(self)
+         |      print a nice ascii table of the sample if you have the PIP module 'prettytable' available.
+         |      :return: prettytable
+         |
+         |  set_taxaList_JSON(self, sourceJson)
+         |      :param  sourceJson: a dict representation of a well-formed uBiome dictionary
+         |      :type sourceJson: dict
+         |      :return:
+         |
+         |  sort(self, sortBy='tax_name')
+         |      sort the sample (mutably) by sortBy (which can be any of the taxonomy file keys)
+         |      :param  sortBy: str:  any of the valid taxonomy file keys
+         |      :return: bool
+         |
+         |  taxaField(self, taxName, field)
+         |      look up taxName in _taxaList and return its attribute corresponding to 'field'
+         |      :param taxName:
+         |      :return:
+         |
+         |  taxnames(self)
+         |      returns a list of all organisms in this sample
+         |      :return: list
+         |
+         |  taxonOf(self, taxName)
+         |
+         |  unique(self, sample2)
+         |      returns all organisms that are unique to sample 1
+         |      :type sample2: UbiomeSample
+         |      :param sample2:
+         |      :return: UBiomeDiffSample
+         |
+         |  write(self, filename, ftype='csv')
+         |      write contents of the current sample to a CSV file.  If filename=sys.stdout, just display it
+         |
+         |      :param filename: name of file to write to.  Include extension in the string name.
+         |      :type filename: str
+         |      :param ftype: str: default is 'csv' for now, but may add other file types in the future.
+         |      :return:
+         |

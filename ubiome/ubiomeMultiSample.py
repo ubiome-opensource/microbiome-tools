@@ -19,12 +19,16 @@ class UbiomeMultiSample(object):
 
 
     """
-    def __init__(self,newSample = []):
+    def __init__(self,newSample = None):
         """
-        : param newSample: UbiomeSample.UbiomeSample
+        Initialize with an existing sample. If you don't specify a sample, the first call to self.merge will add one.
+        :type newSample: UbiomeSample.UbiomeSample
         :rtype: UbiomeMultiSample
+        :ivar self.fullTaxList: list of all taxa found in any of the samples.
+
         """
         self.fullTaxList = [["tax_name","tax_rank"]]
+
         self.samples = []
         if newSample:
             self.fullTaxList +=newSample.taxnames()
@@ -35,7 +39,8 @@ class UbiomeMultiSample(object):
     def alltaxa(self):
         ''' returns just the taxa in this multisample
 
-        :return: list
+        :return: list of all taxa in this sample
+        :rtype: list
         '''
         alltaxa = []
         for sample in self.fullTaxList:
@@ -48,6 +53,7 @@ class UbiomeMultiSample(object):
         """
         Prints a short representation of the UbiomeMultiSample. Useful for debugging
         :return:
+        :rtype: None
         """
         print("length of fullTaxList=",len(self.fullTaxList))
         print([self.fullTaxList[i] for i in range(10)])
@@ -64,7 +70,7 @@ class UbiomeMultiSample(object):
         """ merge the current multiSample with sample2.  This operation is mutable
         so you permanently modify the current UbiomeMultiSample when you do this.
 
-        :param sample2: UbiomeSample
+        :type sample2: UbiomeSample
         :return:
         """
 
@@ -77,22 +83,15 @@ class UbiomeMultiSample(object):
         newTaxNamesL = []
         sampleTaxNames = sample2.taxnames()
 
-        #Sample2ZippedList = sample2.taxnames()
-        #justSample2TaxNames, justSample2TaxRanks = zip(*Sample2ZippedList)
-       # justFullTaxNames, justFullTaxRanks = zip(*self.fullTaxList)
 
-        #newTaxRanksL = []
         for i,taxName in enumerate(sampleTaxNames):
             if taxName not in self.fullTaxList:
                 newTaxNamesL+=[taxName]
-               # newTaxRanksL+=[justFullTaxRanks[i]]
-
 
 
         self.fullTaxList+=newTaxNamesL
         newTaxons = [sample2.taxonOf(taxa[0])for taxa in newTaxNamesL]
 
-        #[sample["count_norm"] for sample in sample2.sampleList]
         oldSamplesList = self.samples[len(self.samples)-1]
         newSampleCountsForPreviousTaxa = []
         for i in range(len(oldSamplesList)-1):
@@ -119,7 +118,8 @@ class UbiomeMultiSample(object):
     def write(self,filename,ftype="csv"):
         """ write the merged bunch of sample to a single CSV file (or sys.stdout)
 
-        :param filename:
+        :type filename: str
+        :param filename: name of file to write to. Include extension
         :return:
         """
         if filename==sys.stdout:

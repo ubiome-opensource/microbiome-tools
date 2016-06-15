@@ -34,13 +34,6 @@ class MyTestCase(unittest.TestCase):
         x.merge(aug)
         self.sampleMultiSample = x
 
-    # TODO  fix Ubiome.UbiomeMultiSample to handle first init properly
-    # def test_multiSample_init(self):
-    #     newMS = ubiome.UbiomeMultiSample()
-    #     newMS.merge(jun14)
-    #
-
-
     def test_unique(self):
         v = may14.unique(jun14)
         self.assertEqual(len(v.taxaList), 384)
@@ -67,7 +60,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_diversity(self):
         v = s1.diversity()
-        self.assertEqual(v,0.8565147480876362)
+        self.assertEqual(v,0.5001489102477326)
 
     def test_diversity_rank_genus(self):
         v = s1.diversity(rank="genus")
