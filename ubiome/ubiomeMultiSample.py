@@ -1,7 +1,6 @@
 
 import sys
 import csv
-from ubiome import UbiomeSample
 
 class UbiomeMultiSample(object):
     """
@@ -46,6 +45,10 @@ class UbiomeMultiSample(object):
 
 
     def showContents(self):
+        """
+        Prints a short representation of the UbiomeMultiSample. Useful for debugging
+        :return:
+        """
         print("length of fullTaxList=",len(self.fullTaxList))
         print([self.fullTaxList[i] for i in range(10)])
         print("length of samples=",len(self.samples))
@@ -113,7 +116,7 @@ class UbiomeMultiSample(object):
 
 
 
-    def writeCSV(self,filename):
+    def write(self,filename,ftype="csv"):
         """ write the merged bunch of sample to a single CSV file (or sys.stdout)
 
         :param filename:
@@ -121,7 +124,6 @@ class UbiomeMultiSample(object):
         """
         if filename==sys.stdout:
             ubiomeWriter = csv.DictWriter(sys.stdout,dialect='excel',fieldnames=["tax_name"]+ ["tax_rank"] + [sample[0] for sample in self.samples])
-            #print('writing to csv')
             ubiomeWriter.writeheader()
             for i,taxa in enumerate(self.fullTaxList):
                 taxName, taxRank = taxa
@@ -131,7 +133,6 @@ class UbiomeMultiSample(object):
                 ubiomeWriter.writerow(dict([rowDict]+[rankDict] +sampleDict))
         else:
             with open(filename,'w') as csvFile:
-                #print('writing to csv')
                 ubiomeWriter = csv.DictWriter(csvFile, dialect='excel',fieldnames=["tax_name"]+ ["tax_rank"] + [sample[0] for sample in self.samples])
                 #print('writing to csv')
                 ubiomeWriter.writeheader()

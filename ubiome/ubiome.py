@@ -62,7 +62,7 @@ class UbiomeTaxa():
         self._avg = ubiomeDict.get('avg',INVALID_AVG)
         self._tax_color = ubiomeDict.get('tax_color',INVALID_COLOR)
 
-    def __repr__(self):
+    def __str__(self):
         return "<ubiome.ubiome.ubiomeDict: "+self.tax_name + ">"
 
     @property
@@ -131,7 +131,7 @@ class UbiomeSample():
         self.date = date
         self.site = site
         if fname:
-            self.readJSONfile(fname)
+            self.load(fname)
         else:
             #self.sampleList = []
             self._taxaList = []
@@ -163,46 +163,49 @@ class UbiomeSample():
             newDicts+=[taxa_dict]
         self._taxaList = [UbiomeTaxa(taxDict) for taxDict in newDicts ]
 
-    def readJSONfile(self,fname):
+    def load(self,fname,ftype="JSON"):
         """ read a JSON file of the uBiome taxonomy (the one you get from downloading from the uBiome web site)
         :param fname: string
+        :param ftype: string # currently unused, but provided for future compatibility
         :return:
         """
         import os
-        #print("current directory = ", os.getcwd())
-        jsonFile = open(fname)
-        sourceJson = json.load(jsonFile)
-        try:
-            site = sourceJson['site']
-            self.site = site
-        except KeyError:
-            pass # keep the default site name
-        try:
-            date_str = sourceJson['sampling_time']
-            self.datetime = datetime.datetime.strptime(date_str,"%Y-%m-%d %H:%M")
-            self.date = datetime.date(self.datetime.year,self.datetime.month,self.datetime.day)
-        except KeyError:
+        if ftype=="CSV":
+            self.__read_CSV_file(fname)
+        else:
+            jsonFile = open(fname)
+            sourceJson = json.load(jsonFile)
             try:
-                date_str = sourceJson['dateSampled']
-                if date_str:
-                    self.datetime = datetime.datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%fZ")
-                    self.date = datetime.date(self.datetime.year, self.datetime.month, self.datetime.day)
+                site = sourceJson['site']
+                self.site = site
             except KeyError:
-                # self.date = datetime.date(2000,1,1)
-                self.datetime = datetime.datetime(self.date.year,self.date.month,self.date.day,0,0)
-        try:
-            self.notes = sourceJson['notes']
-        except KeyError:
-            self.notes = ""
-        try:
-            self.sequencing_revision = sourceJson['sequencing_revision']
-        except KeyError:
-            self.sequencing_revision = "0"
-        self.sequencing_revision = int(self.sequencing_revision)
+                pass # keep the default site name
+            try:
+                date_str = sourceJson['sampling_time']
+                self.datetime = datetime.datetime.strptime(date_str,"%Y-%m-%d %H:%M")
+                self.date = datetime.date(self.datetime.year,self.datetime.month,self.datetime.day)
+            except KeyError:
+                try:
+                    date_str = sourceJson['dateSampled']
+                    if date_str:
+                        self.datetime = datetime.datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%fZ")
+                        self.date = datetime.date(self.datetime.year, self.datetime.month, self.datetime.day)
+                except KeyError:
+                    # self.date = datetime.date(2000,1,1)
+                    self.datetime = datetime.datetime(self.date.year,self.date.month,self.date.day,0,0)
+            try:
+                self.notes = sourceJson['notes']
+            except KeyError:
+                self.notes = ""
+            try:
+                self.sequencing_revision = sourceJson['sequencing_revision']
+            except KeyError:
+                self.sequencing_revision = "0"
+            self.sequencing_revision = int(self.sequencing_revision)
 
-        self.set_taxaList_JSON(sourceJson)
+            self.set_taxaList_JSON(sourceJson)
 
-    def read_CSV_file(self, fname):
+    def __read_CSV_file(self, fname):
         """
         read a CSV-formatted version of the uBiome taxonomy data.
         :param fname: str
@@ -236,7 +239,7 @@ class UbiomeSample():
             #     uniqueTable.add_row([i["tax_name"],i["tax_rank"],i["count_norm"]])
             for i in self._taxaList:
                 uniqueTable.add_row([i.tax_name,i.tax_rank,i.count_norm])
-            #print(uniqueTable)
+            #print(uniqueTable)rs
             return uniqueTable
 
     def sort(self, sortBy = "tax_name"):
@@ -337,26 +340,6 @@ class UbiomeSample():
             return [{"tax_name":taxonList[0],"count_norm":self.countNormOf(taxonList[0])}] +\
                    self.addCountsToList(taxonList[1:])
 
-
-
-    # def compareWith_old(self,sample2):
-    #     """ compare the current sample with sample2 and return a uBiomeDiffSample object of the differences
-    #
-    #     :param sample2: UbiomeSample
-    #     :return: UBiomeDiffSample
-    #     """
-    #
-    #     taxList = []
-    #     for taxon1 in self.sampleList:
-    #         t=sample2.taxonOf(taxon1["tax_name"])
-    #         if t: #found this taxon in sample2
-    #             countDiff = int(taxon1["count_norm"]) - int(t["count_norm"])
-    #             taxList = [{"tax_name":taxon1["tax_name"],\
-    #                         "taxon":taxon1["taxon"],
-    #                         "count_norm":countDiff,"tax_rank":taxon1["tax_rank"]}] + taxList
-    #     diffSample = UbiomeDiffSample(taxList)
-    #     return diffSample
-
     def compareWith(self,sample2):
         """ compare the current sample with sample2 and return a uBiomeDiffSample object of the differences
 
@@ -378,39 +361,49 @@ class UbiomeSample():
         diffSample = UbiomeDiffSample(taxList)
         return diffSample
 
-    def writeCSV(self,filename):
+    def write(self,filename,ftype="csv"):
         """ write contents of the current sample to a CSV file.  If filename=sys.stdout, just display it
 
-        :param filename:
+        :param filename: str
+        :param ftype: str: default is 'csv' for now, but may add other file types in the future.
         :return:
         """
+        if self.taxaList==[]:
+            return
+        else:
+            fields = self.taxaList[0].keys()
         if filename==sys.stdout:
-            ubiomeWriter = csv.DictWriter(sys.stdout,dialect='excel',fieldnames=self.sampleList[0].keys())
+            ubiomeWriter = csv.DictWriter(sys.stdout,dialect='excel',fieldnames=fields)
             #print('writing to csv')
             ubiomeWriter.writeheader()
-            for organism in self.sampleList:
+            for organism in self.taxaList:
                 ubiomeWriter.writerow(organism)
         else:
             with open(filename,'w') as csvFile:
                 #print('writing to csv')
-                ubiomeWriter = csv.DictWriter(csvFile,dialect='excel',fieldnames=self.sampleList[0].keys())
+                ubiomeWriter = csv.DictWriter(csvFile,dialect='excel',fieldnames=fields)
                 ubiomeWriter.writeheader()
-                for organism in self.sampleList:
+                for organism in self.taxaList:
                     ubiomeWriter.writerow(organism)
 
 
 class UbiomeDiffSample(UbiomeSample):
-    """ same as regular uBiome sampleList, except count_norm is a delta, not an absolute number.
+    """ same as regular uBiomeSample, except count_norm is a delta, not an absolute number.
 
     """
     def __init__(self,taxaList):
-        self.sampleList = [{"tax_name":tax.tax_name,\
+        # self.sampleList = [{"tax_name":tax.tax_name,\
+        #                     "count_norm":tax.count_norm,\
+        #                     "percent":tax.percent,\
+        #                     "tax_rank":tax.tax_rank,\
+        #                     "taxon": tax.taxon
+        #                     } for tax in taxaList]
+        self._taxaList = [{"tax_name":tax.tax_name,\
                             "count_norm":tax.count_norm,\
                             "percent":tax.percent,\
                             "tax_rank":tax.tax_rank,\
                             "taxon": tax.taxon
                             } for tax in taxaList]
-        self._taxaList = taxaList
 
 
 
@@ -426,14 +419,14 @@ class ubiomeApp():
 
     def testUnique(self):
         unique=self.sample1.unique(self.sample2)
-        return len(unique.sampleList)
+        return len(unique.taxaList)
         #print("len esample.unique",len(unique.sampleList))
         #unique.writeCSV("sample1Unique.csv")
 
     def runUnique(self):
         unique=self.sample1.unique(self.sample2)
         #print("len esample.unique",len(unique.sampleList))
-        unique.writeCSV(sys.stdout)
+        unique.write(sys.stdout)
 
     def testCompare(self):
         compare=self.sample1.compareWith(self.sample2)
@@ -442,8 +435,8 @@ class ubiomeApp():
 
     def runCompare(self):
         compare=self.sample1.compareWith(self.sample2)
-        compare.writeCSV(sys.stdout)
-        compare.prettyPrint()
+        compare.write(sys.stdout)
+        #compare.prettyPrint()
         return compare
 
 
@@ -456,7 +449,7 @@ if __name__=="__main__":
     parser = ArgumentParser()
     parser.add_argument("-c","--compare",help="Compare sample1 with with sample2")
     parser.add_argument("-u","--unique",help="Find items in sample1 not in sample2")
-    #parser.add_argument("-d","--debug",help="turn on debug mode to run tests")
+    parser.add_argument("-d","--debug",help="turn on debug mode to run tests")
     parser.add_argument("sample2",help="sample you are comparing to")
     args = parser.parse_args()
 
@@ -471,16 +464,14 @@ if __name__=="__main__":
         #print("Unique Sample 1",args.unique,args.sample2)
         a=args.unique
         b=args.sample2
+    if args.debug:
+        a = "./testdata/Sprague-ubiomeMay2014.json"
+        b = "./testdata/Sprague-uBiomeJun2014.json"
 
-   # a = "../Data/sprague data/Sprague-ubiomeMay2014.json"
-   # b = "../Data/sprague data/Sprague-uBiomeJun2014.json"
+
     myApp = ubiomeApp(a,b)
     if args.unique:
         myApp.runUnique()
     if args.compare:
         myApp.runCompare()
-
-
-else:
-    print("uBiome loaded as a module")
 
