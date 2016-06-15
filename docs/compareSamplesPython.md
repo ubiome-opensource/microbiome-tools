@@ -15,9 +15,15 @@ If you are already familiar with the basics of Python programming, see the scrip
 
 ### Command line version (easiest)
 
+If you are familiar with how to use the console application on your computer (the ```Terminal``` application on a Mac, or ```Powershell``` on a Windows PC), you can use this library from the command line.
+
 Download the folder [ubiome](../ubiome) to the same folder where you have two uBiome taxonomy files you want to compare.
 
-On the Macintosh, open the ```Terminal``` application and in the directory where you downloaded the files, type:
+Hint: on a Macintosh, you can download the correct files with the following command:
+
+    $ svn export https://github.com/ubiome-opensource/microbiome-tools/trunk/ubiome ubiome
+
+(this will create a the folder ```ubiome``` in your current directory).
 
 ```
 > python ubiome -h
