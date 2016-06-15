@@ -1,6 +1,6 @@
-#Using the uBiome Tools Repository
+uBiome Tools Repository
 
-![logo](./docs/images/uBiome Logo 480.png)
+![logo](./docs/images/uBiome Logo 480.png | width=300)
 
 Please add your tools here, and edit this file to keep a directory of scripts, programs, templates, or anything else you find useful for manipulating or analyzing uBiome information.
 
