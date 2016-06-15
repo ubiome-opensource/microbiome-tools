@@ -10,17 +10,26 @@ This library will help you look at the JSON summary.
 Main Functions
 ---
 
-Until we have more documentation written, please see the [ubiome-example](microbiome-tools/ubiome_example.py) to see how this works.
+Until more documentation is available, please see the [ubiome-example](microbiome-tools/ubiome_example.py) to see how this works.
 
-The following classes let you manipulate the uBiome taxonomy data:
+# Super Short Intro
 
-*UbiomeSample*
+If you already have your uBiome results downloaded and you know how to use a command line interface on your computer (either Terminal on a Mac or Powershell on Windows), type
 
+    $ pip install ubiome
 
-*UbiomeDiffSample*
+  to download the uBiome Python library from the Python Package Index.
 
-*UbiomeMultiSample*
+  Let's assume you already have two uBiome JSON files available in your current directory, like this:
 
-
-'UbiomeDiffSample','UbiomeMultiSample'
-
+    $ ls
+    sample1.json  sample2.json  x.csv
+    $ python
+    >>> from ubiome import *
+    >>> x1 = UbiomeSample("sample1.json")
+    >>> x2 = UbiomeSample("sample2.json")
+    >>> x = UbiomeMultiSample(x1)
+    >>> x.merge(x2)
+    >>> x.write("x.csv")
+    
+Your directory will now contain the file ```x.csv``` that has all your uBiome results 

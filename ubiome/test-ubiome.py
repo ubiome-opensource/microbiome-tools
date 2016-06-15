@@ -22,7 +22,7 @@ s4 = ubiome.UbiomeSample(pathPrefix+"sample4.json",name="sample2")
 may14 = ubiome.UbiomeSample(pathPrefix+"Sprague-ubiomeMay2014.json",name="May 2014")
 jun14 = ubiome.UbiomeSample(pathPrefix+"sprague-uBiomeJun2014.json",name="Jun 2014")
 aug15 = ubiome.UbiomeSample(name="Aug 2015")
-aug15.read_CSV_file(pathPrefix + "Sprague-ubiome-150815.csv")
+aug15.load(pathPrefix + "Sprague-ubiome-150815.csv",ftype="CSV")
 aug = aug15 #ubiome.UbiomeSample(pathPrefix+"Sprague-ubiome-150815.json",name = "Aug 2015")
 
 
@@ -43,10 +43,10 @@ class MyTestCase(unittest.TestCase):
 
     def test_unique(self):
         v = may14.unique(jun14)
-        self.assertEqual(len(v.sampleList), 384)
+        self.assertEqual(len(v.taxaList), 384)
     def test_compare_with(self):
         v = may14.compareWith(jun14)
-        self.assertEqual(len(v.sampleList),139)
+        self.assertEqual(len(v.taxaList),139)
 
     def test_taxList_count_norm_is_integer(self):
         v = may14._taxaList[0].count_norm

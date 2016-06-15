@@ -4,4 +4,4 @@ from .ubiome import *
 from .ubiomeMultiSample import UbiomeMultiSample
 
 __all__ = ['UbiomeSample','UbiomeDiffSample','UbiomeMultiSample','ubiomeApp']
-version = '0.5.5'
+version = '0.5.6'
