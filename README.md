@@ -1,4 +1,4 @@
-uBiome Tools Repository
+# uBiome Tools Repository
 
 <img src="./docs/images/uBiome Logo 480.png" width=300>
 
