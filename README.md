@@ -1,5 +1,7 @@
 #Using the uBiome Tools Repository
 
+![logo](./docs/images/uBiome Logo 480.png)
+
 Please add your tools here, and edit this file to keep a directory of scripts, programs, templates, or anything else you find useful for manipulating or analyzing uBiome information.
 
 **[ubiome.py: Python module](./docs/compareSamplesPython.md)** Compare any two uBiome samples to find unique taxa (bacteria) or to show the difference in counts. If you have a Mac, the script works without installing anything else.
