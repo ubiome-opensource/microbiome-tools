@@ -5,7 +5,7 @@ from ubiome import UbiomeSample, UbiomeDiffSample, UbiomeMultiSample
 
 my_sample = UbiomeSample()
 
-my_sample.readJSONfile("ubiome/testdata/sample1.json")
+my_sample.load("ubiome/testdata/sample1.json")
 
 my_sample.showContents() # useful for debugging
 
@@ -46,17 +46,17 @@ all_JSON_files = ubiome_tax_filenames(test_dir)
 
 
 first_sample = UbiomeSample(name=all_JSON_files[0])
-first_sample.readJSONfile(all_JSON_files[0])
+first_sample.load(all_JSON_files[0])
 
 all_samples = UbiomeMultiSample(first_sample)
 
 for sample_file in all_JSON_files[1:]:
     next_sample = UbiomeSample(name=sample_file)
-    next_sample.readJSONfile(sample_file)
+    next_sample.load(sample_file)
     all_samples.merge(next_sample)
 
 
-all_samples.writeCSV("example.csv")
+all_samples.write("example.csv")
 
 
 

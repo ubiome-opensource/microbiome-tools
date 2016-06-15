@@ -124,7 +124,7 @@ class UbiomeMultiSample(object):
         """
         if filename==sys.stdout:
             ubiomeWriter = csv.DictWriter(sys.stdout,dialect='excel',fieldnames=["tax_name"]+ ["tax_rank"] + [sample[0] for sample in self.samples])
-            ubiomeWriter.writeheader()
+            #ubiomeWriter.writeheader()
             for i,taxa in enumerate(self.fullTaxList):
                 taxName, taxRank = taxa
                 rowDict = ["tax_name",taxName]
@@ -135,7 +135,7 @@ class UbiomeMultiSample(object):
             with open(filename,'w') as csvFile:
                 ubiomeWriter = csv.DictWriter(csvFile, dialect='excel',fieldnames=["tax_name"]+ ["tax_rank"] + [sample[0] for sample in self.samples])
                 #print('writing to csv')
-                ubiomeWriter.writeheader()
+                #ubiomeWriter.writeheader()
                 for i,taxa in enumerate(self.fullTaxList):
                     taxName, taxRank = taxa
                     rowDict = ["tax_name",taxName]
