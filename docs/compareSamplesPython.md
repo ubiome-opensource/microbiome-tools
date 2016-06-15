@@ -20,14 +20,15 @@ Download the folder [ubiome](../ubiome) to the same folder where you have two uB
 On the Macintosh, open the ```Terminal``` application and in the directory where you downloaded the files, type:
 
 ```
-> python -m ubiome.ubiome -h
+> python ubiome -h
 ```
 You should see the following:
 
 ```
-usage: ubiome.py [-h] [-c COMPARE] [-u UNIQUE] [-d DEBUG] sample2
+usage: ubiome.py [-h] [-c COMPARE] [-u UNIQUE] [-d DEBUG] sample1 sample2
 
 positional arguments:
+  sample1               filename for a valid uBiome JSON taxonomy file
   sample2               sample you are comparing to
 
 optional arguments:
@@ -45,7 +46,7 @@ To compare two samples, type:
 
 ```
 
-> python ubiome.py -c sample1.json sample2.json
+> python ubiome -c sample1.json sample2.json
 ```
 
 You will see several lines of comma-separated values indicating the difference in `count_norm` values between the two samples.
@@ -53,48 +54,44 @@ You will see several lines of comma-separated values indicating the difference i
 You can also type the following to save the results to the file "compare12.csv"
 
 ```
-> python -m ubiome.ubiome -c sample1.json sample2.json > compare12.csv
+> python ubiome -c sample1.json sample2.json > compare12.csv
 ```
 
 Similarly, to see the unique organisms in one sample compared to the other, type:
 
 ```
-> python -m ubiome.ubiome -u sample1.json sample2.json
+> python ubiome -u sample1.json sample2.json
 
 ```
 
 ## Module version (requires knowledge of Python)
 
-Write your own Python script. Here's an example using JSON files from the current directory:
+Download the enclosed 'ubiome' directory to make the ```ubiome``` module available on your computer (either Python 2 or 3).
 
-	import ubiome
-	# create a new instance of class UbiomeSample, initialized to a json file
-	jul = ubiome.UbiomeSample("Sprague-ubiomeJul2015.json")
-	apr = ubiome.UbiomeSample("sprague-ubiome-150428.json")
+A simpler way, if you have the PIP command available on your system:
 
-	# these variables hold instances of class UbiomeDiffSample
-	aprJulc = apr.compareWith(jul)
-	aprJulu = apr.unique(jul)
+    $ pip ubiome
 
-	# sort them, pretty-print them
-	aprJulu.sort("count_norm")
-	aprJuluPretty = aprJulu.prettyPrint() 
-	aprJulu.writeCSV("AprJulUnique.csv")  # or write to a CSV file on disk
+to download the uBiome Python library from the Python Package Index.
 
-## Combine multiple uBiome JSON files into a single spreadsheet (CSV)
-You can also merge several sample files together to make a big CSV file where the
-first row is all the taxons ever found in your samples, and the other columns are your different samples, with rows containing the `count_norm` for every taxon.
+The following example assumes you downloaded two uBiome JSON files into your current directory, like this:
 
+    $ ls
 
-Example, given two samples (JSON files read from current directory)
+    sample1.json  sample2.json  x.csv
 
-	aprB = ubiome.UbiomeSample("sprague-ubiome-150428.json",name = "Apr28")
-    jul = ubiome.UbiomeSample("Sprague-ubiomeJul2015.json",name = "Jun 2015")
-    x = ubiome.UbiomeMultiSample(aprB)
-    x.merge(jul)
-    x.writeCSV("combinedResults.csv")
-    
-This will leave you the file "combinedResults.csv" with the combined `count_norm`s for your two samples
+Run the following series of commands in your Python 2+ or 3+ console:
+
+    $ python
+
+    >>> from ubiome import *
+    >>> x1 = UbiomeSample("sample1.json")
+    >>> x2 = UbiomeSample("sample2.json")
+    >>> x = UbiomeMultiSample(x1)
+    >>> x.merge(x2)
+    >>> x.write("x.csv")
+
+Now your directory will have a new file ```x.csv``` with both samples merged. The first row is all the taxons ever found in your samples, and the other columns are your different samples, with rows containing the `count_norm` for every taxon.
 
 
 
