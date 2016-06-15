@@ -7,27 +7,21 @@ Advanced users have access to the raw data, including the original FASTQ files f
 
 This library will help you look at the JSON summary.
 
-Main Functions
----
-
 Until more documentation is available, please see the [ubiome-example](microbiome-tools/ubiome_example.py) to see how this works.
 
-# Super Short Intro
+## Super Short Intro
 
 If you already have your uBiome results downloaded and you know how to use a command line interface on your computer (either Terminal on a Mac or Powershell on Windows), type
 
-<<<<<<< HEAD
+
     $ pip install ubiome
-=======
-    $ pip ubiome
->>>>>>> c8f04041977a7d6efa9d7978e3375c56aebb90c5
 
   to download the uBiome Python library from the Python Package Index.
 
   Let's assume you already have two uBiome JSON files available in your current directory, like this:
 
     $ ls
-    sample1.json  sample2.json  x.csv
+    sample1.json  sample2.json
     $ python
     >>> from ubiome import *
     >>> x1 = UbiomeSample("sample1.json")
@@ -36,4 +30,17 @@ If you already have your uBiome results downloaded and you know how to use a com
     >>> x.merge(x2)
     >>> x.write("x.csv")
     
-Your directory will now contain the file ```x.csv``` that has all your uBiome results 
+Your directory will now contain the file ```x.csv``` that has all your uBiome results laid out in a spreadsheet form like this:
+
+| tax_name                           | tax_rank     | sample1.json | sample2.json | 
+|------------------------------------|--------------|--------------|--------------| 
+| Bacteria                           | superkingdom | 1000000      | 1000000      | 
+| Firmicutes                         | phylum       | 622877       | 463379       | 
+| Dialister                          | genus        | 6039         | 0            | 
+| Desulfovibrio                      | genus        | 799          | 0            | 
+| environmental samples              | no_rank      | 799          | 0            | 
+| Desulfovibrio sp. oral clone BB161 | species      | 780          | 0            | 
+| Ruminococcus faecis                | species      | 772          | 0            | 
+| ...                                |              |              |              | 
+
+You should know what to do at this point. Filter by tax_rank, sort by column, etc.  If you want to convert everything to percentages, divide the integers by 10,000.
