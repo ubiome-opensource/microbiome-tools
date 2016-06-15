@@ -2,6 +2,7 @@ README.rst
 setup.cfg
 setup.py
 ubiome/__init__.py
+ubiome/__main__.py
 ubiome/test-ubiome.py
 ubiome/ubiome.py
 ubiome/ubiomeMultiSample.py

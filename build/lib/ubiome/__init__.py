@@ -1,7 +1,7 @@
 __author__ = 'sprague'
 
-from .ubiome import *
+from .ubiome import UbiomeDiffSample, UbiomeSample, UbiomeTaxa
 from .ubiomeMultiSample import UbiomeMultiSample
 
-__all__ = ['UbiomeSample','UbiomeDiffSample','UbiomeMultiSample','ubiomeApp']
-version = '0.5.5'
+__all__ = ['UbiomeSample','UbiomeDiffSample','UbiomeMultiSample']
+version = '0.5.7'
