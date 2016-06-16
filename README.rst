@@ -28,7 +28,7 @@ or Powershell on Windows), type
 
 ::
 
-    $ pip ubiome
+    $ pip install ubiome
 
 to download the uBiome Python library from the Python Package Index.
 

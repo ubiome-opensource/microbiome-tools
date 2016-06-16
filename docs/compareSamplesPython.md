@@ -76,7 +76,7 @@ Download the enclosed 'ubiome' directory to make the ```ubiome``` module availab
 
 A simpler way, if you have the PIP command available on your system:
 
-    $ pip ubiome
+    $ pip install ubiome
 
 to download the uBiome Python library from the Python Package Index.
 
