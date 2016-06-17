@@ -1,0 +1,3 @@
+[console_scripts]
+ubiome = ubiome.__main__:main
+
