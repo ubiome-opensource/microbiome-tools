@@ -22,14 +22,14 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.5.9',
+    version='0.6.0',
 
     description='uBiome core taxonomy library',
-    long_description=long_description,
+    long_description="Tools to manipulate your uBiome JSON taxonomy files, including unique, compare, diversity, and more.",
 
     # The project's main homepage.
     url='https://github.com/ubiome-opensource/microbiome-tools',
-    download_url= 'https://github.com/ubiome-opensource/microbiome-tools/0.8',
+    download_url= 'https://github.com/ubiome-opensource/microbiome-tools/',
 
     # Author details
     author='Richard Sprague',
