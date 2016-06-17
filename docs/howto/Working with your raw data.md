@@ -84,10 +84,10 @@ Hint: on a Macintosh, you can download the correct files with the following comm
 
     $ svn export https://github.com/ubiome-opensource/microbiome-tools/trunk/ubiome ubiome
 
-(this will create a the folder ```ubiome``` in your current directory).
+(this will create the folder ```ubiome``` in your current directory).
 
 ```
-> python ubiome -h
+> python -m ubiome -h
 ```
 You should see the following:
 
@@ -113,7 +113,7 @@ To compare two samples, type:
 
 ```
 
-> python ubiome -c sample1.json sample2.json
+> python -m ubiome -c sample1.json sample2.json
 ```
 
 You will see several lines of comma-separated values indicating the difference in `count_norm` values between the two samples.
@@ -121,13 +121,13 @@ You will see several lines of comma-separated values indicating the difference i
 You can also type the following to save the results to the file "compare12.csv"
 
 ```
-> python ubiome -c sample1.json sample2.json > compare12.csv
+> python -m ubiome -c sample1.json sample2.json > compare12.csv
 ```
 
 Similarly, to see the unique organisms in one sample compared to the other, type:
 
 ```
-> python ubiome -u sample1.json sample2.json
+> python -m ubiome -u sample1.json sample2.json
 
 ```
 
@@ -141,7 +141,13 @@ A simpler way, if you have the PIP command available on your system:
 
 to download the uBiome Python library from the Python Package Index.
 
-The following example assumes you downloaded two uBiome JSON files into your current directory, like this:
+This will create a new system command, ```ubiome``` that works like this:
+
+    $ ubiome -c sample1.json sample2.json
+ 
+ to compare two samples and send the results to standard output.
+ 
+ The following example assumes you downloaded two uBiome JSON files into your current directory, like this:
 
     $ ls
 
