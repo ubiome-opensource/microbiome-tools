@@ -167,5 +167,19 @@ Run the following series of commands in your Python 2+ or 3+ console:
 
 Now your directory will have a new file ```x.csv``` with all samples merged. The first row is all the taxons ever found in your samples, and the other columns are your different samples, with rows containing the `count_norm` for every taxon.
 
+The merged form, called a UbiomeMultiSample, can do even more interesting operations. For example, continue to merge a few more samples in the example above, and then run this code:
 
+    >>> samples=x.originalSampleObjects # just the UbiomeSample objects of the merged items
+    >>> diversity = [sample.diversity() for sample in samples]
+    >>> dates = [sample.date for sample in samples]
+
+If you have matplotlib on your system, run this:
+
+    >>> plot(dates,diversity)
+
+You will see this chart that plots the diversity of a series of samples over time:
+
+![Diversity Chart](uBiomeDiversityChart.jpg)
+
+And much more! Try your own examples and let us know what you discover!
 
