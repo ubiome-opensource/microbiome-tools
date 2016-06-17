@@ -13,10 +13,8 @@ class UbiomeMultiSample(object):
     usage: (assuming sample1 and sample2 are of class UbiomeSample)
 
     x = UbiomeMultiSample()  # initializing
-    x.merge(sample1) #
-
-
-
+    x.merge(sample1)
+    x.merge(sample2)
 
     """
     def __init__(self,newSample = None):
@@ -28,12 +26,14 @@ class UbiomeMultiSample(object):
 
         """
         self.fullTaxList = [["tax_name","tax_rank"]]
+        self.originalSampleObjects = []
 
         self.samples = []
         if newSample:
             self.fullTaxList +=newSample.taxnames()
 #            self.samples+=[[newSample.name]+[sample["count_norm"] for sample in newSample.sampleList]]
             self.samples+=[[newSample.name]+[sample.count_norm for sample in newSample.taxaList]]
+            self.originalSampleObjects.append(newSample)
 
 
     def alltaxa(self):
@@ -102,10 +102,8 @@ class UbiomeMultiSample(object):
             newSampleCountsForPreviousTaxa+=[taxCount]
         newCounts =  newSampleCountsForPreviousTaxa + [taxon["count_norm"] for taxon in newTaxons]
 
-
-
-
         self.samples += [[sample2.name] + newCounts]
+        self.originalSampleObjects.append(sample2)
 
         # new length of a sample is len(newTaxons)+ len(oldSamplesList)
         # fill previous samples with count_norm = 0
@@ -113,9 +111,7 @@ class UbiomeMultiSample(object):
             if len(self.samples[i])<(len(newCounts)+1):
                 self.samples[i]=self.samples[i] + [0 for k in range(len(newTaxons))]
 
-
-
-    def write(self,filename,ftype="csv"):
+    def write(self, filename, ftype="csv"):
         """ write the merged bunch of sample to a single CSV file (or sys.stdout)
 
         :type filename: str

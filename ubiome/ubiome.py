@@ -62,12 +62,19 @@ class UbiomeTaxa():
         self._tax_color = ubiomeDict.get('tax_color', INVALID_COLOR)
 
     def __str__(self):
-        return "<ubiome.ubiome.ubiomeDict: " + self.tax_name + ">"
+        return "<ubiome.UbiomeTaxa: " + self.tax_name + ">"
+
+    @classmethod
+    def nullTaxa(self):
+        return {"tax_name": "None", "taxon": INVALID_TAXON, "parent": INVALID_TAXON, \
+                "count": 0, "count_norm": 0, "tax_rank": INVALID_RANK, "avg": INVALID_AVG,
+                "tax_color": INVALID_COLOR}
 
     @property
     def dictForm(self):
         ''' returns taxa as a dict, for compatibility with the original JSON
         :return:dict
+        :rtype: dict
         '''
         return {"tax_name": self.tax_name, "taxon": self.taxon, "parent": self.parent, \
                 "count": self.count, "count_norm": self.count_norm, "tax_rank": self.tax_rank, "avg": self.avg,
@@ -118,10 +125,6 @@ class UbiomeTaxa():
     @property
     def tax_rank(self):
         return self._tax_rank
-
-
-# A sampleList is a list of dictionaries, each of which is a field from the standard uBiome JSON taxonomy
-# _taxalist is the same thing, only made of elements of class UbiomeTaxa
 
 
 class UbiomeSample():
@@ -304,13 +307,17 @@ class UbiomeSample():
         return d  # sum(s[i%l]<>s[i/l]for i in range(l*l))/(l-1.)/l
 
     def taxaField(self, taxName, field):
-        ''' look up taxName in _taxaList and return its attribute corresponding to 'field'
+        ''' look up taxName in _taxaList and return the field attribute.
+        e.g. self.taxaField("Firmicutes","count_norm") will give the count_norm of any Firmicutes in the sample.
+
         :param taxName:
-        :return:
+        :return: the value of the field attribute for this taxa; None if there isn't one.
+        :rtype: bool
         '''
         for taxa in self.taxaList:
             if taxa.tax_name == taxName:
-                return getattr(taxa, field)
+                return getattr(taxa, field, None)
+        return None
 
     def countNormOf(self, taxName):
         """
@@ -321,7 +328,10 @@ class UbiomeSample():
         return self.taxaField(taxName, 'count_norm')
 
     def taxonOf(self, taxName):
-        return self.taxaField(taxName, 'dictForm')
+        taxa = self.taxaField(taxName, 'dictForm')
+        if taxa:
+            return taxa
+        return None
 
     def unique(self, sample2):
         """

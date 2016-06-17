@@ -1,7 +1,7 @@
 Using the Ubiome Python Library
 ---
 
-[uBiome](http://ubiome.com) is a citizen science company that collects and analyzes samples of the human microbiome. Send them your sample and they will process it using the information contained in the 16S subregion of the bacterial genome and send you the results.
+[uBiome](http://ubiome.com) is a citizen science company that collects and analyzes samples of the human microbiome. Send your sample and get it processed using the information contained in the 16S ribosomal subregion of the bacterial genome.
 
 Advanced users have access to the raw data, including the original FASTQ files from uBiome's Illumina NextSeq500 machine as well as a JSON-encapsulated summary of the results.
 
