@@ -20,7 +20,7 @@ To understand taxonomy files, it's helpful to review some elementary biology. Yo
 | Genus   | *Homo*       | 
 | Species | *H.* sapiens | 
 
-Whenever you see a bacterium named on a uBiome site or in the taxonomy files, you should always pay attention to the rank, and remember that ranks can be extremely broad. Most people want to know whether a bacteria is "good" or "bad", but depending on the rank, that question is as meaningless as asking whether, say, Animals or Chordates (vertebrates) are "good" or "bad". In fact, even at the more narrow Genus rank that question usually isn't terribly useful. After all, the genus *Canus* includes not just loveable Beagles and Collies, but foxes and wolves too. 
+Whenever you see a bacterium named on a uBiome site or in the taxonomy files, you should always pay attention to the rank, and remember that ranks can be extremely broad. Most people want to know whether a bacteria is "good" or "bad", but depending on the rank, that question is as meaningless as asking whether, say, Animals or Chordates (vertebrates) are "good" or "bad". In fact, even at the more narrow Genus rank that question usually isn't terribly useful. After all, the genus *Canus* includes not just loveable Beagles and Collies, but coyotes and wolves too. 
  
 # uBiome taxonomy files
 
@@ -30,7 +30,7 @@ Both CSV and JSON files come with a set of fields like these:
 
 **tax_name**: this is the classification of the organism based on the level of its taxonomy. If you were looking at a human being, for example, you would see homo sapiens if you selected tax_rank = species, but you’d see mammalia if you selected tax_rank = class.
 
-**count**: an absolute measure of number of organisms found in the sample. Without knowing the size of the sample, or how many times the DNA inside was processed through PCR amplification, this number doesn’t mean much except in relation to other counts at the same taxonomical rank.
+**count**: an absolute measure of the number of organisms found in the sample. Without knowing the size of the sample, or how many times the DNA inside was processed through PCR amplification, this number doesn’t mean much except in relation to other counts at the same taxonomical rank.
 
 **count_norm**: a “normalized” version of the count, based on some uBiome number-crunching, but you can think of it as parts per million: each unit is 1 / 10,000th of a percent.
 
@@ -38,7 +38,9 @@ Both CSV and JSON files come with a set of fields like these:
 
 **taxon** and **parent**: these help identify the ranking in a more precise way by pointing out which tax_ranks are subsets of which. For example, Bacteroidia above has a parent = 976, meaning that it is a subset of the taxon 976, Bacteroidetes. When you follow the various taxons and parents up the chain, you’ll see they all end in the superkingdom Bacteria, which has a taxon of 2. The values for these numbers, incidentally, are taxonomical numbers from the curated database at NCBI, the national bioinformatics center run by the U.S. government. Enter the number into the taxonomy browser at the [NCBI Taxonomy Browser](http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Undef&id=2&lvl=3&srchmode=1&keep=1&unlock) and you can learn as much as you want about that organism.
 
-**tax_color** doesn’t matter for this anaysis, but uBiome software uses this to colorize their pretty graphs to make them more readable.
+**tax_color** doesn’t matter for this analysis, but uBiome software uses this to colorize some of the graphs to make them more readable.
+
+Getting to know these taxonomy fields is not very complicated and soon it will be second nature.
 
 # Using the uBiome CSV file
 
@@ -135,7 +137,7 @@ Download the enclosed 'ubiome' directory to make the ```ubiome``` module availab
 
 A simpler way, if you have the PIP command available on your system:
 
-    $ pip ubiome
+    $ pip install ubiome
 
 to download the uBiome Python library from the Python Package Index.
 
@@ -154,9 +156,10 @@ Run the following series of commands in your Python 2+ or 3+ console:
     >>> x2 = UbiomeSample("sample2.json")
     >>> x = UbiomeMultiSample(x1)
     >>> x.merge(x2)
+    >>> # continue to merge as many additional samples as you like
     >>> x.write("x.csv")
 
-Now your directory will have a new file ```x.csv``` with both samples merged. The first row is all the taxons ever found in your samples, and the other columns are your different samples, with rows containing the `count_norm` for every taxon.
+Now your directory will have a new file ```x.csv``` with all samples merged. The first row is all the taxons ever found in your samples, and the other columns are your different samples, with rows containing the `count_norm` for every taxon.
 
 
 

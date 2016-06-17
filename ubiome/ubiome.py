@@ -14,7 +14,6 @@ import csv
 import sys
 import datetime
 
-from argparse import ArgumentParser
 
 INVALID_TAXON = -1
 INVALID_COLOR = -2
@@ -410,12 +409,12 @@ class UbiomeDiffSample(UbiomeSample):
     """
 
     def __init__(self, taxaList):
-        self._taxaList = [{"tax_name": tax.tax_name, \
+        self._taxaList = [UbiomeTaxa({"tax_name": tax.tax_name, \
                            "count_norm": tax.count_norm, \
                            "percent": tax.percent, \
                            "tax_rank": tax.tax_rank, \
                            "taxon": tax.taxon
-                           } for tax in taxaList]
+                           }) for tax in taxaList]
 
 
 class ubiomeApp():
@@ -450,35 +449,9 @@ class ubiomeApp():
         return compare
 
 
-if __name__ == "__main__":
-    # print("run uBiomeCompare.py")
-    # import doctest
+# if __name__ == "__main__":
+#     # print("run uBiomeCompare.py")
+#     # import doctest
+#     print("run as a script")
+#
 
-
-    parser = ArgumentParser()
-    parser.add_argument("-c", "--compare", help="Compare sample1 with with sample2")
-    parser.add_argument("-u", "--unique", help="Find items in sample1 not in sample2")
-    parser.add_argument("-d", "--debug", help="turn on debug mode to run tests")
-    parser.add_argument("sample2", help="sample you are comparing to")
-    args = parser.parse_args()
-
-    if not (args):
-        print("type ubiomecompare -h for help")
-        quit()
-    if args.compare:
-        # print("Compare Sample 1 Args=",args.compare,args.sample2)
-        a = args.compare
-        b = args.sample2
-    if args.unique:
-        # print("Unique Sample 1",args.unique,args.sample2)
-        a = args.unique
-        b = args.sample2
-    if args.debug:
-        a = "./testdata/Sprague-ubiomeMay2014.json"
-        b = "./testdata/Sprague-uBiomeJun2014.json"
-
-    myApp = ubiomeApp(a, b)
-    if args.unique:
-        myApp.runUnique()
-    if args.compare:
-        myApp.runCompare()
