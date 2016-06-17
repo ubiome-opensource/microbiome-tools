@@ -1,7 +1,7 @@
 import sys
 from argparse import ArgumentParser
 
-from ubiome import ubiomeApp
+from .ubiome import ubiomeApp
 
 
 def main(args=None):
