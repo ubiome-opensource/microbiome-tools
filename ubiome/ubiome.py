@@ -277,7 +277,7 @@ class UbiomeSample():
         return summary
 
     def __repr__(self):
-        return "<ubiome.UbiomeSample: name=\"{}\">".format(self.name)
+        return "<{}: name=\"{}\">".format(type(self),self.name)
 
     def taxnames(self):
         """ returns a list of all organisms in this sample
@@ -386,20 +386,20 @@ class UbiomeSample():
         if self.taxaList == []:
             return
         else:
-            fields = self.taxaList[0].keys()
+            fields = self.taxaList[0].dictForm.keys()
         if filename == sys.stdout:
             ubiomeWriter = csv.DictWriter(sys.stdout, dialect='excel', fieldnames=fields)
             # print('writing to csv')
             ubiomeWriter.writeheader()
             for organism in self.taxaList:
-                ubiomeWriter.writerow(organism)
+                ubiomeWriter.writerow(organism.dictForm)
         else:
             with open(filename, 'w') as csvFile:
                 # print('writing to csv')
                 ubiomeWriter = csv.DictWriter(csvFile, dialect='excel', fieldnames=fields)
                 ubiomeWriter.writeheader()
                 for organism in self.taxaList:
-                    ubiomeWriter.writerow(organism)
+                    ubiomeWriter.writerow(organism.dictForm)
 
 
 class UbiomeDiffSample(UbiomeSample):
@@ -409,6 +409,7 @@ class UbiomeDiffSample(UbiomeSample):
     """
 
     def __init__(self, taxaList):
+        self.name = "Diff"
         self._taxaList = [UbiomeTaxa({"tax_name": tax.tax_name, \
                            "count_norm": tax.count_norm, \
                            "percent": tax.percent, \

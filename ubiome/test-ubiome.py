@@ -36,9 +36,12 @@ class MyTestCase(unittest.TestCase):
 
     def test_unique(self):
         v = may14.unique(jun14)
+        self.assertEqual(v.taxaList[8].percent,0.0008)
         self.assertEqual(len(v.taxaList), 384)
+        
     def test_compare_with(self):
         v = may14.compareWith(jun14)
+        self.assertEqual(v.taxaList[5].count_norm,-124739)
         self.assertEqual(len(v.taxaList),139)
 
     def test_taxList_count_norm_is_integer(self):
