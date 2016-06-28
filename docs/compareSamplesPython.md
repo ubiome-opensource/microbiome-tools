@@ -70,7 +70,7 @@ Similarly, to see the unique organisms in one sample compared to the other, type
 
 ```
 
-To merge all JSON files in the current directory into a single CSV file, type:
+To merge the ```count_norm``` values in multiple taxonomy files into a single CSV file, type:
 
 ```
 > python ubiome -m *.json
