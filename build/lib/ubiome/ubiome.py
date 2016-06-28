@@ -66,9 +66,9 @@ class UbiomeTaxa():
 
     @classmethod
     def nullTaxa(self):
-        return {"tax_name": "None", "taxon": INVALID_TAXON, "parent": INVALID_TAXON, \
-                "count": 0, "count_norm": 0, "tax_rank": INVALID_RANK, "avg": INVALID_AVG,
-                "tax_color": INVALID_COLOR}
+        return UbiomeTaxa({"tax_name": "None", "taxon": INVALID_TAXON, "parent": INVALID_TAXON, \
+                "count": 0, "percent":0, "count_norm": 0, "tax_rank": INVALID_RANK, "avg": INVALID_AVG,
+                "tax_color": INVALID_COLOR})
 
     @property
     def dictForm(self):
@@ -99,8 +99,11 @@ class UbiomeTaxa():
         ''' convert count_norm to percentage of sample
 
         :return: float
+        :rtype: float
         '''
-        return round(self.count_norm / 10000, 4)
+        if self.count_norm > 0:
+            return round(self.count_norm / 10000, 4)
+        return 0
 
     @property
     def taxon(self):
@@ -199,6 +202,10 @@ class UbiomeSample():
             try:
                 date_str = sourceJson['sampling_time']
                 self.datetime = datetime.datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+                self.date = datetime.date(self.datetime.year, self.datetime.month, self.datetime.day)
+            except ValueError:
+                date_str = sourceJson['sampling_time']
+                self.datetime = datetime.datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%fZ")
                 self.date = datetime.date(self.datetime.year, self.datetime.month, self.datetime.day)
             except KeyError:
                 try:
@@ -316,22 +323,40 @@ class UbiomeSample():
         '''
         for taxa in self.taxaList:
             if taxa.tax_name == taxName:
-                return getattr(taxa, field, None)
+                return taxa # getattr(taxa, field, None)
         return None
 
     def countNormOf(self, taxName):
         """
         returns the count_norm of a given taxName for a sample
         :param taxName: string representation of a uBiome tax_name
-        :return:
+        :return: count_norm of taxName; 0 if no such taxName in sample
+        :rtype: int
         """
-        return self.taxaField(taxName, 'count_norm')
+        t = self.taxonOf(taxName)
+        if t:
+            return t.count_norm
+        else:
+            return 0
 
     def taxonOf(self, taxName):
-        taxa = self.taxaField(taxName, 'dictForm')
-        if taxa:
-            return taxa
+        """
+        Returns the full taxon whose tax_name matches taxName, or None of no matches.
+
+
+        :param taxName:
+        :return:
+        :rtype ubiome.UbiomeTaxa
+        """
+        for taxa in self.taxaList:
+            if taxa.tax_name == taxName:
+                return taxa  # getattr(taxa, field, None)
         return None
+
+        # taxa = self.taxaField(taxName, 'dictForm')
+        # if taxa:
+        #     return taxa
+        # return None
 
     def unique(self, sample2):
         """
@@ -458,6 +483,7 @@ class ubiomeApp():
         compare.write(sys.stdout)
         # compare.prettyPrint()
         return compare
+
 
 
 # if __name__ == "__main__":
