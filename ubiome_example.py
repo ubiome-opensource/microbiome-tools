@@ -7,7 +7,7 @@ my_sample = UbiomeSample()
 
 my_sample.load("ubiome/testdata/sample1.json")
 
-my_sample.showContents() # useful for debugging
+print(my_sample) # useful for debugging
 
 
 import os

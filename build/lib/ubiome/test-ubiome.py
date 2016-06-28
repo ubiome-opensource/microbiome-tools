@@ -71,7 +71,12 @@ class MyTestCase(unittest.TestCase):
 
     def test_taxonOf(self):
         v = may14.taxonOf("Clostridiales")
-        self.assertEqual(v,{'taxon': '186802', 'count': 150137, 'tax_rank': 'order', 'avg': None, 'tax_color': None, 'tax_name': 'Clostridiales', 'parent': '186801', 'count_norm': 594169})
+        assert (isinstance(v, ubiome.UbiomeTaxa))
+        z = v.dictForm # {'taxon': '186802', 'count': 150137, 'tax_rank': 'order', 'avg': None, 'tax_color': None, 'tax_name': 'Clostridiales', 'parent': '186801', 'count_norm': 594169})
+        self.assertEqual(v.tax_name,z["tax_name"])
+        self.assertEqual(v.count_norm,z["count_norm"])
+        self.assertEqual(v.percent,59.4169)
+        #self.assertEqual(v,z)
 
     def test_sampleFullTaxListLength(self):
         self.assertEqual(len(self.sampleMultiSample.fullTaxList), 795)

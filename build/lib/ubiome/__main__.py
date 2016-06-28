@@ -7,8 +7,8 @@ from .ubiomeMultiSample import UbiomeMultiSample
 
 def main(args=None):
     """The main routine."""
-    if args is None:
-        args = sys.argv[1:]
+ #   if args is None:
+ #       args = sys.argv[1:]
     if not len(sys.argv) > 1:
         print("A processor for uBiome taxonomy files. Type ubiome -h for help")
         quit()
@@ -36,6 +36,7 @@ def main(args=None):
     if args.multi:
         m = UbiomeMultiSample(UbiomeSample(args.multi[0]))
         for sample in args.multi[1:]:
+            print("arg=",sample,"\n")
             m.merge(UbiomeSample(sample))
         m.write(filename=sys.stdout)
 

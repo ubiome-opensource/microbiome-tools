@@ -97,10 +97,10 @@ class UbiomeMultiSample(object):
         for i in range(len(oldSamplesList)-1):
             taxonForTaxName = sample2.taxonOf(self.fullTaxList[i+1][0])
             if taxonForTaxName:
-                taxCount = taxonForTaxName["count_norm"]
+                taxCount = taxonForTaxName.count_norm #["count_norm"]
             else: taxCount = 0
             newSampleCountsForPreviousTaxa+=[taxCount]
-        newCounts =  newSampleCountsForPreviousTaxa + [taxon["count_norm"] for taxon in newTaxons]
+        newCounts =  newSampleCountsForPreviousTaxa + [taxon.count_norm for taxon in newTaxons]
 
         self.samples += [[sample2.name] + newCounts]
         self.originalSampleObjects.append(sample2)
