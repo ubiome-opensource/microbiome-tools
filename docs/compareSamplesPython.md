@@ -31,20 +31,20 @@ Hint: on a Macintosh, you can download the correct files with the following comm
 You should see the following:
 
 ```
-usage: ubiome.py [-h] [-c COMPARE] [-u UNIQUE] [-d DEBUG] sample1 sample2
-
-positional arguments:
-  sample1               filename for a valid uBiome JSON taxonomy file
-  sample2               sample you are comparing to
+usage: ubiome.py [-h] [-c sample1.json sample2.json]
+                   [-u sample1.json sample2.json] [-d DEBUG]
+                   [-m sample1.json [sample2.json ...]]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -c COMPARE, --compare COMPARE
-                        Compare sample1 with with sample2
-  -u UNIQUE, --unique UNIQUE
+  -c sample1.json sample2.json, --compare sample1.json sample2.json
+                        Compare sample1 with sample2
+  -u sample1.json sample2.json, --unique sample1.json sample2.json
                         Find items in sample1 not in sample2
   -d DEBUG, --debug DEBUG
-                        turn debug mode to run tests
+                        turn on debug mode to run tests
+  -m sample1.json [sample2.json ...], --multi sample1.json [sample2.json ...]
+                        Combine multiple samples
 
 ```                      
 
@@ -69,6 +69,14 @@ Similarly, to see the unique organisms in one sample compared to the other, type
 > python ubiome -u sample1.json sample2.json
 
 ```
+
+To merge all JSON files in the current directory into a single CSV file, type:
+
+```
+> python ubiome -m *.json
+
+```
+
 
 ## Module version (requires knowledge of Python)
 
