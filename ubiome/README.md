@@ -10,7 +10,7 @@ This library will help you analyze and process the JSON summary.
 Main Functions
 ---
 
-Until we have complete documentation, please see the [ubiome-example](microbiome-tools/ubiome_example.py) to see how this works.
+Until we have complete documentation, please see the [ubiome-example](../ubiome_example.py) to see how this works.
 
 ## Get Started Quickly
 
