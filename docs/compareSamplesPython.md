@@ -12,10 +12,19 @@ If you are already familiar with the basics of Python programming, see the scrip
 
 ## Compare two samples
 
+These instructions assume you are familiar with how to use the console application on your computer (the ```Terminal``` application on a Mac, or ```Powershell``` on a Windows PC). You will also need a computer with Python installed. If you have a Mac, a version is pre-installed. On either Mac or Windows, you can download the latest version of Python [here](https://www.python.org/downloads/).
+
+### Download the uBiome Python library
+
+A simpler way, if you have the PIP command available on your system:
+
+    $ pip install ubiome
+
+to download the uBiome Python library from the Python Package Index.
+
 
 ### Command line version (easiest)
 
-If you are familiar with how to use the console application on your computer (the ```Terminal``` application on a Mac, or ```Powershell``` on a Windows PC), you can use this library from the command line.
 
 Download the folder [ubiome](../ubiome) to the same folder where you have two uBiome taxonomy files you want to compare.
 
@@ -26,7 +35,7 @@ Hint: on a Macintosh, you can download the correct files with the following comm
 (this will create a the folder ```ubiome``` in your current directory).
 
 ```
-> python ubiome -h
+$ python -m ubiome -h
 ```
 You should see the following:
 
@@ -52,7 +61,7 @@ To compare two samples, type:
 
 ```
 
-> python ubiome -c sample1.json sample2.json
+$ python -m ubiome -c sample1.json sample2.json
 ```
 
 You will see several lines of comma-separated values indicating the difference in `count_norm` values between the two samples.
@@ -60,20 +69,20 @@ You will see several lines of comma-separated values indicating the difference i
 You can also type the following to save the results to the file "compare12.csv"
 
 ```
-> python ubiome -c sample1.json sample2.json > compare12.csv
+$ python -m ubiome -c sample1.json sample2.json > compare12.csv
 ```
 
 Similarly, to see the unique organisms in one sample compared to the other, type:
 
 ```
-> python ubiome -u sample1.json sample2.json
+$ python -m ubiome -u sample1.json sample2.json
 
 ```
 
 To merge the ```count_norm``` values in multiple taxonomy files into a single CSV file, type:
 
 ```
-> python ubiome -m *.json
+$ python -m ubiome -m *.json
 
 ```
 
